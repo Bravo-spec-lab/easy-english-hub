@@ -1,0 +1,26 @@
+# Archivos comprimidos y respaldos pesados
+*.zip
+*.rar
+*.7z
+*.tar.gz
+materiales/
+
+# Dependencias y entornos
+node_modules/
+.venv/
+venv/
+env/
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de sistema y logs
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.bak

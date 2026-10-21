@@ -888,6 +888,18 @@ body {
   border-bottom: 1px solid var(--border-color);
   gap: 0.5rem;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-highlight) transparent;
+}
+.classroom-tabs-bar::-webkit-scrollbar {
+  height: 6px;
+}
+.classroom-tabs-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.classroom-tabs-bar::-webkit-scrollbar-thumb {
+  background: var(--border-highlight);
+  border-radius: 3px;
 }
 .stage-tab-btn {
   background: transparent;

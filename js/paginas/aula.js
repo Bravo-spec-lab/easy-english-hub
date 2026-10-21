@@ -925,12 +925,22 @@ function updateGlobalProgress() {
 
 function switchClassroomTab(tabId) {
   currentTab = tabId;
+  let activeBtn = null;
   DOM.stageTabBtns.forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+    const isTarget = btn.getAttribute('data-tab') === tabId;
+    btn.classList.toggle('active', isTarget);
+    if (isTarget) activeBtn = btn;
   });
   DOM.stagePanels.forEach(p => {
     p.classList.toggle('active', p.id === `stagePanel_${tabId}`);
   });
+  if (activeBtn) {
+    const bar = activeBtn.parentElement;
+    if (bar && bar.scrollWidth > bar.clientWidth) {
+      const target = activeBtn.offsetLeft - (bar.clientWidth - activeBtn.offsetWidth) / 2;
+      bar.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+  }
   const url = new URL(window.location);
   url.searchParams.set('tab', tabId);
   window.history.replaceState({}, '', url);

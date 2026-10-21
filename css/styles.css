@@ -1972,3 +1972,14 @@ body {
     font-size: 1.5rem;
   }
 }
+
+
+/* Botones implementados como <a> (navegacion multipagina) */
+a.btn-primary-action,
+a.btn-open-module,
+a.btn-stage-nav,
+a.btn-complete-lesson,
+a.btn-audio-play,
+a.btn-audio-stop {
+  text-decoration: none;
+}

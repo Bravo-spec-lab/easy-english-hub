@@ -3,7 +3,7 @@
  * Desarrollado por Bravo • Computación e Informática
  */
 
-import { applyTheme, updateGlobalProgressUI, wireLightbox, stopAudio } from './common.js';
+import { state, applyTheme, updateGlobalProgressUI, wireLightbox, stopAudio } from './common.js';
 
 /**
  * Monta el shell común alrededor del contenido de la página.

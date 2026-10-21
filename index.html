@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EASY English Hub | Desarrollado por Bravo (Computación e Informática)</title>
+  <title>Dashboard | EASY English Hub</title>
   <meta name="description"
     content="Plataforma web educativa de Inglés Básico desarrollada por Bravo (Computación e Informática). Aula virtual interactiva con voz nativa en inglés, diapositivas en pantalla, ejercicios, evaluaciones e infografías.">
   <meta name="keywords"
@@ -26,548 +26,115 @@
 
 <body>
 
-  <div class="app-shell" id="appShellContainer">
+  <!-- Contenido de la vista Dashboard (el layout común lo envuelve js/layout.js) -->
+  <template id="pageTemplate">
+    <section class="view-section active" id="view_dashboard">
+      <div class="dashboard-container">
 
-    <!-- =======================================================================
-         Fixed Left Navigation Sidebar
-         ======================================================================= -->
-    <aside class="app-sidebar" id="appSidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-logo-icon">
-          <i class="fa-solid fa-graduation-cap"></i>
-        </div>
-        <div class="sidebar-brand-titles">
-          <h1>EASY English Hub</h1>
-          <div class="sidebar-brand-badge">Dev by Bravo • Computación e Informática</div>
-        </div>
-      </div>
-
-      <nav class="sidebar-nav" id="sidebarNavMenu" aria-label="Navegación principal de la plataforma">
-        <span class="nav-section-title">Plataforma Educativa</span>
-
-        <button type="button" class="nav-item-btn active" data-view="dashboard" id="navBtn_dashboard">
-          <i class="fa-solid fa-chart-pie"></i>
-          <span>Dashboard</span>
-        </button>
-
-        <button type="button" class="nav-item-btn" data-view="classroom" id="navBtn_classroom">
-          <i class="fa-solid fa-book-open-reader"></i>
-          <span>Aula Virtual</span>
-          <span class="nav-pill-badge">18 Días</span>
-        </button>
-
-        <button type="button" class="nav-item-btn" data-view="quizzes" id="navBtn_quizzes">
-          <i class="fa-solid fa-list-check"></i>
-          <span>Evaluaciones</span>
-          <span class="nav-pill-badge">18 Quizzes</span>
-        </button>
-
-        <button type="button" class="nav-item-btn" data-view="vocabulary" id="navBtn_vocabulary">
-          <i class="fa-solid fa-layer-group"></i>
-          <span>Vocabulario & Verbos</span>
-          <span class="nav-pill-badge">124</span>
-        </button>
-
-        <button type="button" class="nav-item-btn" data-view="gallery" id="navBtn_gallery">
-          <i class="fa-solid fa-images"></i>
-          <span>Infografías & Afiches</span>
-        </button>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="student-card-mini">
-          <div class="student-avatar" style="background: linear-gradient(135deg, var(--primary-600), var(--violet-600)); font-weight: 700; color: white;">BR</div>
-          <div class="student-info">
-            <h4>Bravo</h4>
-            <p>Computación e Informática</p>
+        <!-- Welcome Hero Banner -->
+        <div class="dash-welcome-card" id="dashWelcomeCard">
+          <div class="dash-welcome-content">
+            <h2>¡Bienvenido a EASY English Hub!</h2>
+            <p>Plataforma EdTech interactiva desarrollada por <strong>Bravo</strong> (Computación e Informática). Diseñada para potenciar el aprendizaje del idioma inglés mediante lectura asistida por voz nativa, diapositivas interactivas en pantalla, práctica guiada y evaluaciones en tiempo real.</p>
           </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- =======================================================================
-         App Main Viewport (Topbar + Content Stage)
-         ======================================================================= -->
-    <div class="app-viewport">
-
-      <!-- Topbar Header -->
-      <header class="app-topbar" id="appTopbar">
-        <div class="topbar-left">
-          <button type="button" class="btn-sidebar-toggle" id="sidebarToggleBtn" title="Abrir menú de navegación">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-
-          <div class="topbar-breadcrumbs" id="topbarBreadcrumbs">
-            <i class="fa-solid fa-compass" style="color: var(--primary-500);"></i>
-            <span class="active-view-name" id="breadcrumbViewName">Dashboard / Inicio</span>
+          <div>
+            <a class="btn-primary-action" href="aula.html">
+              <i class="fa-solid fa-play"></i> <span>Ingresar al Aula Virtual</span>
+            </a>
           </div>
         </div>
 
-        <div class="topbar-actions">
-          <!-- Quick Search -->
-          <div class="topbar-search-box">
-            <i class="fa-solid fa-magnifying-glass topbar-search-icon"></i>
-            <input type="text" class="topbar-search-input" id="topbarSearchInput"
-              placeholder="Buscar vocabulario o tema...">
-          </div>
-
-          <!-- Course Progress Pill -->
-          <div class="topbar-progress-pill" id="topbarProgressPill" title="Progreso del curso">
-            <i class="fa-solid fa-circle-check" style="color: var(--emerald-500);"></i>
-            <span id="topbarProgressText">0/18 (0%)</span>
-            <div class="topbar-progress-bar">
-              <div class="topbar-progress-fill" id="topbarProgressFill" style="width: 0%;"></div>
+        <!-- 4 Key Performance Metrics -->
+        <div class="dash-stats-grid">
+          <div class="stat-widget-card">
+            <div class="stat-icon-wrapper stat-icon-blue">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div class="stat-info-details">
+              <h3 id="dashCompletedText">0 / 18</h3>
+              <p>Lecciones Completadas</p>
             </div>
           </div>
 
-          <!-- Color Mode Toggle -->
-          <button type="button" class="btn-topbar-action" id="themeToggleBtn" title="Cambiar tema de color">
-            <i class="fa-solid fa-sun" id="themeToggleIcon"></i>
-          </button>
+          <div class="stat-widget-card">
+            <div class="stat-icon-wrapper stat-icon-purple">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div class="stat-info-details">
+              <h3 id="dashQuizzesText">0 / 18</h3>
+              <p>Autoevaluaciones Rendidas</p>
+            </div>
+          </div>
+
+          <div class="stat-widget-card">
+            <div class="stat-icon-wrapper stat-icon-green">
+              <i class="fa-solid fa-spell-check"></i>
+            </div>
+            <div class="stat-info-details">
+              <h3 id="dashVocabText">124</h3>
+              <p>Términos y Verbos</p>
+            </div>
+          </div>
+
+          <div class="stat-widget-card">
+            <div class="stat-icon-wrapper stat-icon-amber">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+            <div class="stat-info-details">
+              <h3 id="dashStreakText">Activo</h3>
+              <p>Racha de Aprendizaje</p>
+            </div>
+          </div>
         </div>
-      </header>
 
-      <!-- Main Stage Dynamic Views Container -->
-      <main class="app-main" id="appMainStage">
+        <!-- Primary Continue Card -->
+        <div class="dash-welcome-card" id="dashContinueCard"
+          style="background: var(--bg-surface); border-color: var(--border-color); box-shadow: var(--shadow-sm);">
+          <div>
+            <span
+              style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-500); letter-spacing: 0.05em;">Lección
+              Sugerida</span>
+            <h3 id="dashContinueTitle"
+              style="font-family: var(--font-heading); font-size: 1.35rem; margin-top: 0.3rem;">Semana 1 • Día 1:
+              Welcome & Diagnostic</h3>
+            <p id="dashContinueSub" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+              Activación de conocimientos previos y diagnóstico en Simple Present.</p>
+          </div>
+          <a class="btn-primary-action" id="dashContinueBtn" href="aula.html">
+            <i class="fa-solid fa-arrow-right"></i> <span>Continuar Lección</span>
+          </a>
+        </div>
 
-        <!-- =====================================================================
-             VIEW 1: Dashboard / Panel de Control
-             ===================================================================== -->
-        <section class="view-section active" id="view_dashboard">
-          <div class="dashboard-container">
-
-            <!-- Welcome Hero Banner -->
-            <div class="dash-welcome-card" id="dashWelcomeCard">
-              <div class="dash-welcome-content">
-                <h2>¡Bienvenido a EASY English Hub!</h2>
-                <p>Plataforma EdTech interactiva desarrollada por <strong>Bravo</strong> (Computación e Informática). Diseñada para potenciar el aprendizaje del idioma inglés mediante lectura asistida por voz nativa, diapositivas interactivas en pantalla, práctica guiada y evaluaciones en tiempo real.</p>
-              </div>
-              <div>
-                <button type="button" class="btn-primary-action" id="dashStartLearningBtn"
-                  onclick="document.getElementById('navBtn_classroom').click();">
-                  <i class="fa-solid fa-play"></i> <span>Ingresar al Aula Virtual</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 4 Key Performance Metrics -->
-            <div class="dash-stats-grid">
-              <div class="stat-widget-card">
-                <div class="stat-icon-wrapper stat-icon-blue">
-                  <i class="fa-solid fa-book-open"></i>
-                </div>
-                <div class="stat-info-details">
-                  <h3 id="dashCompletedText">0 / 18</h3>
-                  <p>Lecciones Completadas</p>
-                </div>
-              </div>
-
-              <div class="stat-widget-card">
-                <div class="stat-icon-wrapper stat-icon-purple">
-                  <i class="fa-solid fa-award"></i>
-                </div>
-                <div class="stat-info-details">
-                  <h3 id="dashQuizzesText">0 / 18</h3>
-                  <p>Autoevaluaciones Rendidas</p>
-                </div>
-              </div>
-
-              <div class="stat-widget-card">
-                <div class="stat-icon-wrapper stat-icon-green">
-                  <i class="fa-solid fa-spell-check"></i>
-                </div>
-                <div class="stat-info-details">
-                  <h3 id="dashVocabText">124</h3>
-                  <p>Términos y Verbos</p>
-                </div>
-              </div>
-
-              <div class="stat-widget-card">
-                <div class="stat-icon-wrapper stat-icon-amber">
-                  <i class="fa-solid fa-fire"></i>
-                </div>
-                <div class="stat-info-details">
-                  <h3 id="dashStreakText">Activo</h3>
-                  <p>Racha de Aprendizaje</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Primary Continue Card -->
-            <div class="dash-welcome-card" id="dashContinueCard"
-              style="background: var(--bg-surface); border-color: var(--border-color); box-shadow: var(--shadow-sm);">
-              <div>
-                <span
-                  style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--primary-500); letter-spacing: 0.05em;">Lección
-                  Sugerida</span>
-                <h3 id="dashContinueTitle"
-                  style="font-family: var(--font-heading); font-size: 1.35rem; margin-top: 0.3rem;">Semana 1 • Día 1:
-                  Welcome & Diagnostic</h3>
-                <p id="dashContinueSub" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
-                  Activación de conocimientos previos y diagnóstico en Simple Present.</p>
-              </div>
-              <button type="button" class="btn-primary-action" id="dashContinueBtn">
-                <i class="fa-solid fa-arrow-right"></i> <span>Continuar Lección</span>
-              </button>
-            </div>
-
-            <!-- Modules (Semanas) Overview -->
+        <!-- Modules (Semanas) Overview -->
+        <div>
+          <div class="section-headline">
             <div>
-              <div class="section-headline">
-                <div>
-                  <h3>Módulos Académicos del Curso</h3>
-                  <p>3 semanas estructuradas con 6 días de estudio progresivo cada una.</p>
-                </div>
-              </div>
-
-              <div class="dash-modules-grid" id="dashModulesGrid">
-                <!-- Populated dynamically by js/app.js -->
-              </div>
-            </div>
-
-            <!-- Personal Brand Footer Badge -->
-            <footer class="dash-footer-signature" style="margin-top: 36px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-              <p style="margin-bottom: 4px;"><strong>EASY English Hub</strong> &copy; 2026 • Desarrollado por <strong>Bravo</strong> • Computación e Informática</p>
-              <p style="font-size: 0.78rem; opacity: 0.85;">Plataforma Web EdTech para el Aprendizaje Integral de Inglés Técnico</p>
-            </footer>
-
-          </div>
-        </section>
-
-        <!-- =====================================================================
-             VIEW 2: Aula Virtual / LMS Classroom
-             ===================================================================== -->
-        <section class="view-section" id="view_classroom">
-          <div class="classroom-layout">
-
-            <!-- Left Syllabus Navigator (Tree inside Classroom) -->
-            <aside class="syllabus-card" id="syllabusCard">
-              <h3 class="syllabus-title">
-                <i class="fa-solid fa-list-ol" style="color: var(--primary-500);"></i> Temario del Curso
-              </h3>
-              <div class="syllabus-accordion" id="syllabusAccordion">
-                <!-- Populated dynamically -->
-              </div>
-            </aside>
-
-            <!-- Right Main Stage Classroom Workspace -->
-            <div class="classroom-stage-card" id="classroomStageCard">
-
-              <!-- Stage Header -->
-              <div class="stage-header">
-                <div class="stage-header-info">
-                  <div class="stage-badges-row">
-                    <span class="stage-week-badge" id="stageWeekBadge">Semana 1</span>
-                    <span class="stage-focus-tag" id="stageFocusTag">
-                      <i class="fa-solid fa-bullseye"></i> Enfoque del día
-                    </span>
-                  </div>
-                  <h2 class="stage-lesson-title" id="stageLessonTitle">Cargando Lección...</h2>
-                </div>
-
-                <div class="stage-header-actions">
-                  <button type="button" class="btn-complete-lesson" id="stageCompleteBtn">
-                    <i class="fa-regular fa-circle-check"></i> Marcar como Completada
-                  </button>
-                </div>
-              </div>
-
-              <!-- Classroom Tabs Bar (All 6 core elements on-screen!) -->
-              <nav class="classroom-tabs-bar" id="classroomTabsBar" aria-label="Contenidos de la clase">
-                <button type="button" class="stage-tab-btn active" data-tab="reading">
-                  <i class="fa-solid fa-book-open"></i> 1. Lectura Asistida
-                </button>
-                <button type="button" class="stage-tab-btn" data-tab="worksheet">
-                  <i class="fa-solid fa-pen-ruler"></i> 2. Ficha Práctica
-                </button>
-                <button type="button" class="stage-tab-btn" data-tab="quiz">
-                  <i class="fa-solid fa-circle-question"></i> 3. Autoevaluación
-                </button>
-                <button type="button" class="stage-tab-btn" data-tab="slides">
-                  <i class="fa-solid fa-chalkboard-user"></i> 4. Diapositivas PPT
-                </button>
-                <button type="button" class="stage-tab-btn" data-tab="resources">
-                  <i class="fa-solid fa-globe"></i> 5. Recursos & Práctica
-                </button>
-                <button type="button" class="stage-tab-btn" data-tab="poster">
-                  <i class="fa-solid fa-image"></i> 6. Infografía
-                </button>
-              </nav>
-
-              <!-- Tab Panel 1: Lectura Asistida con Voz -->
-              <div class="stage-panel active" id="stagePanel_reading">
-                <!-- Audio Bar -->
-                <div class="audio-player-bar" id="audioPlayerBar">
-                  <div class="audio-controls-left">
-                    <button type="button" class="btn-audio-play" id="audioPlayBtn">
-                      <i class="fa-solid fa-play"></i> Escuchar Lectura
-                    </button>
-                    <button type="button" class="btn-audio-stop" id="audioStopBtn" title="Detener audio">
-                      <i class="fa-solid fa-stop"></i> Detener
-                    </button>
-                    <label for="audioSpeedSelect" style="display:none;">Velocidad</label>
-                    <select id="audioSpeedSelect" class="audio-speed-select" title="Velocidad de reproducción">
-                      <option value="0.8">0.8x (Lento)</option>
-                      <option value="1.0" selected>1.0x (Normal)</option>
-                      <option value="1.2">1.2x (Rápido)</option>
-                    </select>
-                  </div>
-                  <div class="audio-status-label" id="audioStatusLabel">
-                    <i class="fa-solid fa-circle-pause" style="color: var(--text-muted)"></i> Audio listo
-                  </div>
-                </div>
-
-                <!-- Dual Layout: Reading Text + Grammar & Vocabulary -->
-                <div class="reading-stage-grid">
-                  <div class="reading-main-column">
-                    <div class="reading-text-card" id="readingTextCard">
-                      <!-- Populated dynamically -->
-                    </div>
-
-                    <div class="grammar-card" id="grammarCard">
-                      <div class="grammar-card-header">
-                        <i class="fa-solid fa-code"></i> Grammar Focus (Estructura Gramatical)
-                      </div>
-                      <div class="grammar-card-body" id="grammarCardBody">
-                        <!-- Populated dynamically -->
-                      </div>
-                    </div>
-                  </div>
-
-                  <aside class="stage-side-column">
-                    <div class="vocab-widget-card" id="vocabWidgetCard">
-                      <h4 id="vocabWidgetTitle"><i class="fa-solid fa-lightbulb"></i> Vocabulario Clave</h4>
-                      <div class="vocab-chips-wrap" id="vocabChipsWrap">
-                        <!-- Populated dynamically -->
-                      </div>
-                    </div>
-
-                    <div class="after-reading-card" id="afterReadingCard">
-                      <h4><i class="fa-solid fa-list-check"></i> Actividades Post-Lectura</h4>
-                      <ul class="after-reading-list" id="afterReadingList">
-                        <!-- Populated dynamically -->
-                      </ul>
-                    </div>
-                  </aside>
-                </div>
-              </div>
-
-              <!-- Tab Panel 2: Ficha Práctica Interactiva -->
-              <div class="stage-panel" id="stagePanel_worksheet">
-                <div class="worksheet-container">
-                  <div id="worksheetSectionsWrap">
-                    <!-- Populated dynamically -->
-                  </div>
-                  <div style="display: flex; justify-content: flex-end; padding-top: 1rem;">
-                    <button type="button" class="btn-primary-action" id="saveWorksheetBtn">
-                      <i class="fa-solid fa-floppy-disk"></i> <span>Guardar Mis Respuestas</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tab Panel 3: Autoevaluación (Quiz) -->
-              <div class="stage-panel" id="stagePanel_quiz">
-                <div class="quiz-wrapper">
-                  <div class="quiz-score-banner">
-                    <div class="quiz-score-text">
-                      <h3>Autoevaluación Oficial del Día</h3>
-                      <p>Responde las 5 preguntas y obtén retroalimentación inmediata con explicación.</p>
-                    </div>
-                    <div class="quiz-score-pill" id="quizScorePill">0 / 5</div>
-                  </div>
-
-                  <div id="quizQuestionsWrap" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <!-- Populated dynamically -->
-                  </div>
-
-                  <div class="master-answer-card">
-                    <div class="master-answer-header" id="masterAnswerHeader">
-                      <h4><i class="fa-solid fa-key"></i> Ver Solucionario y Hoja de Respuestas</h4>
-                      <i class="fa-solid fa-chevron-down" id="masterAnswerIcon"></i>
-                    </div>
-                    <div class="master-answer-body" id="masterAnswerBody">
-                      <!-- Populated dynamically -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tab Panel 4: Diapositivas PPT Interactivas en Pantalla -->
-              <div class="stage-panel" id="stagePanel_slides">
-                <div class="slides-viewer-card">
-                  <div class="slides-toolbar">
-                    <div style="display: flex; align-items: center; gap: 0.8rem;">
-                      <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700;">
-                        <i class="fa-solid fa-chalkboard-user"
-                          style="color: var(--primary-500); margin-right: 0.35rem;"></i> Diapositivas Oficiales de la
-                        Semana
-                      </h4>
-                      <span class="slide-counter-badge" id="slideCounterBadge">Diapositiva 1 de 8</span>
-                    </div>
-
-                    <div class="slide-controls">
-                      <button type="button" class="btn-stage-nav" id="slidePrevBtn">
-                        <i class="fa-solid fa-chevron-left"></i> Anterior
-                      </button>
-                      <button type="button" class="btn-stage-nav" id="slideNextBtn">
-                        Siguiente <i class="fa-solid fa-chevron-right"></i>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div class="slide-stage-canvas" id="slideStageCanvas">
-                    <!-- Populated dynamically -->
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tab Panel 5: Recursos Digitales y Práctica Online -->
-              <div class="stage-panel" id="stagePanel_resources">
-                <div id="resourcesContainer">
-                  <!-- Populated dynamically -->
-                </div>
-              </div>
-
-              <!-- Tab Panel 6: Infografía del Día -->
-              <div class="stage-panel" id="stagePanel_poster">
-                <div class="poster-viewer-card">
-                  <div
-                    style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h4 style="font-family: var(--font-heading); font-size: 1.1rem;"><i class="fa-solid fa-image"></i>
-                      Infografía Educativa de la Lección</h4>
-                    <button type="button" class="btn-stage-nav" id="posterFullBtn">
-                      <i class="fa-solid fa-expand"></i> Pantalla Completa
-                    </button>
-                  </div>
-                  <div class="poster-media-container" id="posterMediaWrap">
-                    <!-- Populated dynamically -->
-                  </div>
-                </div>
-              </div>
-
-              <!-- Stage Navigation Footer (Prev / Next Buttons) -->
-              <div class="stage-nav-footer">
-                <button type="button" class="btn-stage-nav" id="prevLessonBtn">
-                  <i class="fa-solid fa-arrow-left"></i> Lección Anterior
-                </button>
-                <button type="button" class="btn-stage-nav" id="nextLessonBtn">
-                  Siguiente Lección <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-
+              <h3>Módulos Académicos del Curso</h3>
+              <p>3 semanas estructuradas con 6 días de estudio progresivo cada una.</p>
             </div>
           </div>
-        </section>
 
-        <!-- =====================================================================
-             VIEW 3: Centro de Evaluaciones (Quizzes Hub)
-             ===================================================================== -->
-        <section class="view-section" id="view_quizzes">
-          <div class="quizzes-hub-container">
-            <div class="section-headline">
-              <div>
-                <h3>Centro de Evaluaciones & Quizzes</h3>
-                <p>Monitorea y rinde las 18 autoevaluaciones oficiales del curso con corrección en tiempo real.</p>
-              </div>
-            </div>
-
-            <!-- Filter Bar -->
-            <div class="quizzes-filter-bar" id="quizzesFilterBar">
-              <button type="button" class="btn-filter-pill active" data-filter="all">Todos los Quizzes (18)</button>
-              <button type="button" class="btn-filter-pill" data-filter="1">Semana 1: Simple Present</button>
-              <button type="button" class="btn-filter-pill" data-filter="2">Semana 2: Continuous Tenses</button>
-              <button type="button" class="btn-filter-pill" data-filter="3">Semana 3: Simple Past</button>
-            </div>
-
-            <div class="quizzes-cards-grid" id="quizzesCardsGrid">
-              <!-- Populated dynamically -->
-            </div>
+          <div class="dash-modules-grid" id="dashModulesGrid">
+            <!-- Populated dynamically by js/paginas/dashboard.js -->
           </div>
-        </section>
+        </div>
 
-        <!-- =====================================================================
-             VIEW 4: Vocabulario & Verbos (Flashcards & Diccionario)
-             ===================================================================== -->
-        <section class="view-section" id="view_vocabulary">
-          <div class="vocab-hub-container">
-            <div class="section-headline">
-              <div>
-                <h3>Laboratorio de Vocabulario & Verbos</h3>
-                <p>Más de 120 términos técnicos, verbos regulares e irregulares y expresiones con audio pronunciado.</p>
-              </div>
-            </div>
+        <!-- Personal Brand Footer Badge -->
+        <footer class="dash-footer-signature"
+          style="margin-top: 36px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+          <p style="margin-bottom: 4px;"><strong>EASY English Hub</strong> &copy; 2026 • Desarrollado por
+            <strong>Bravo</strong> • Computación e Informática</p>
+          <p style="font-size: 0.78rem; opacity: 0.85;">Plataforma Web EdTech para el Aprendizaje Integral de Inglés
+            Técnico</p>
+        </footer>
 
-            <!-- Toolbar & Search -->
-            <div class="vocab-toolbar">
-              <div class="vocab-category-filters" id="vocabCategoryFilters">
-                <button type="button" class="btn-filter-pill active" data-cat="all">Todos (124)</button>
-                <button type="button" class="btn-filter-pill" data-cat="Verbos Regulares">Verbos Regulares</button>
-                <button type="button" class="btn-filter-pill" data-cat="Verbos Irregulares">Verbos Irregulares</button>
-                <button type="button" class="btn-filter-pill" data-cat="Expresiones de Tiempo">Expresiones de
-                  Tiempo</button>
-                <button type="button" class="btn-filter-pill" data-cat="Vocabulario Profesional">Vocabulario
-                  Profesional</button>
-              </div>
-
-              <input type="text" class="vocab-search-input" id="vocabSearchInput"
-                placeholder="Filtrar por palabra (ej. study, work)...">
-            </div>
-
-            <div class="vocab-cards-grid" id="vocabCardsGrid">
-              <!-- Populated dynamically -->
-            </div>
-          </div>
-        </section>
-
-        <!-- =====================================================================
-             VIEW 5: Galería de Infografías & Afiches
-             ===================================================================== -->
-        <section class="view-section" id="view_gallery">
-          <div class="gallery-hub-container">
-            <div class="section-headline">
-              <div>
-                <h3>Galería de Infografías & Afiches Educativos</h3>
-                <p>Explora el material visual y resúmenes gráficos de todas las lecciones del curso.</p>
-              </div>
-            </div>
-
-            <div class="gallery-grid" id="galleryCardsGrid">
-              <!-- Populated dynamically -->
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       Media Lightbox Modal (For Full-Screen Posters & Documents)
-       ========================================================================= -->
-  <div class="modal-overlay" id="mediaLightboxModal">
-    <div class="modal-window" style="max-width: 950px;">
-      <div class="modal-header">
-        <h3 id="lightboxTitle"><i class="fa-solid fa-image" style="color: var(--primary-500);"></i> Visor de Infografía
-        </h3>
-        <button type="button" class="modal-close-btn" id="lightboxCloseBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="modal-body" id="lightboxMediaContainer">
-        <!-- Injected dynamically -->
-      </div>
-    </div>
-  </div>
+    </section>
+  </template>
 
-  <!-- Toast Notification -->
-  <aside class="toast-notice" id="toastNotice" role="status" aria-live="polite">
-    <i class="fa-solid fa-circle-check" style="color: var(--emerald-500);"></i>
-    <span id="toastMessage">Notificación</span>
-  </aside>
+  <div id="appRoot"></div>
 
-  <!-- Core Scripts -->
-  <script src="js/course-data.js"></script>
-  <script src="js/app.js"></script>
+  <script type="module" src="js/paginas/dashboard.js"></script>
 </body>
 
 </html>

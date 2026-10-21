@@ -63,25 +63,35 @@
 
           <!-- Classroom Tabs Bar -->
           <nav class="classroom-tabs-bar" id="classroomTabsBar" aria-label="Contenidos de la clase">
+            <button type="button" class="stage-tab-btn" data-tab="theory">
+              <i class="fa-solid fa-graduation-cap"></i> 1. Teoría
+            </button>
             <button type="button" class="stage-tab-btn" data-tab="reading">
-              <i class="fa-solid fa-book-open"></i> 1. Lectura Asistida
+              <i class="fa-solid fa-book-open"></i> 2. Lectura Asistida
             </button>
             <button type="button" class="stage-tab-btn" data-tab="worksheet">
-              <i class="fa-solid fa-pen-ruler"></i> 2. Ficha Práctica
+              <i class="fa-solid fa-pen-ruler"></i> 3. Ficha Práctica
             </button>
             <button type="button" class="stage-tab-btn" data-tab="quiz">
-              <i class="fa-solid fa-circle-question"></i> 3. Autoevaluación
+              <i class="fa-solid fa-circle-question"></i> 4. Autoevaluación
             </button>
             <button type="button" class="stage-tab-btn" data-tab="slides">
-              <i class="fa-solid fa-chalkboard-user"></i> 4. Diapositivas PPT
+              <i class="fa-solid fa-chalkboard-user"></i> 5. Diapositivas PPT
             </button>
             <button type="button" class="stage-tab-btn" data-tab="resources">
-              <i class="fa-solid fa-globe"></i> 5. Recursos & Práctica
+              <i class="fa-solid fa-globe"></i> 6. Recursos & Práctica
             </button>
             <button type="button" class="stage-tab-btn" data-tab="poster">
-              <i class="fa-solid fa-image"></i> 6. Infografía
+              <i class="fa-solid fa-image"></i> 7. Infografía
             </button>
           </nav>
+
+          <!-- Tab Panel 0: Teoría -->
+          <div class="stage-panel" id="stagePanel_theory">
+            <div class="theory-container" id="theoryContainer">
+              <!-- Populated dynamically by js/paginas/aula.js -->
+            </div>
+          </div>
 
           <!-- Tab Panel 1: Lectura Asistida con Voz -->
           <div class="stage-panel" id="stagePanel_reading">

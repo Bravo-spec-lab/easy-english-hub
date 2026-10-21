@@ -9,18 +9,20 @@ import {
   speakText, startSpeech, stopAudio, updateAudioUI
 } from '../common.js';
 import { COURSE_DATA, getWeek, getDay } from '../data/index.js';
+import { THEORIES } from '../data/theories.js';
 
 // --- Parámetros de la URL: aula.html?week=1&day=2&tab=quiz ---
 const params = new URLSearchParams(window.location.search);
 let currentWeekId = parseInt(params.get('week'), 10) || 1;
 let currentDayNum = parseInt(params.get('day'), 10) || 1;
-let currentTab = params.get('tab') || 'reading';
+let currentTab = params.get('tab') || 'theory';
 
 // --- DOM cache (lazy: se llena tras montar el shell, porque el contenido vive en <template>) ---
 let DOM = null;
 
 function initDomCache() {
   DOM = {
+  theoryContainer: document.getElementById('theoryContainer'),
   syllabusAccordion: document.getElementById('syllabusAccordion'),
   stageWeekBadge: document.getElementById('stageWeekBadge'),
   stageLessonTitle: document.getElementById('stageLessonTitle'),
@@ -84,6 +86,7 @@ function renderClassroom(weekId, dayNum) {
 
   updateLessonCompletionButton(weekId, dayNum);
   renderSyllabusTree(weekId, dayNum);
+  renderTheoryStage(weekId, dayNum);
   renderReadingStage(day);
   renderWorksheetStage(weekId, dayNum, day);
   renderQuizStage(weekId, dayNum, day);
@@ -93,6 +96,15 @@ function renderClassroom(weekId, dayNum) {
   setupStageNavButtons(weekId, dayNum);
   switchClassroomTab(currentTab);
   updateBreadcrumb();
+}
+
+function renderTheoryStage(weekId, dayNum) {
+  if (!DOM.theoryContainer) return;
+  const html = THEORIES[`w${weekId}-d${dayNum}`];
+  DOM.theoryContainer.innerHTML = html || `
+    <div class="theory-block">
+      <p>La teoría de esta lección no está disponible todavía. Completa la lectura asistida y la autoevaluación del día.</p>
+    </div>`;
 }
 
 function renderSyllabusTree(currentWeekId, currentDayNum) {

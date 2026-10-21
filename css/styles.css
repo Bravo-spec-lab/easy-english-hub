@@ -1131,6 +1131,10 @@ body {
 
 /* Flujo de calificación del quiz */
 .option-btn.selected {
+  border-color: var(--primary-500);
+  background: rgba(59, 130, 246, 0.12);
+  transform: translateX(4px);
+}
 .theory-container {
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);

@@ -1,11 +1,11 @@
 # EASY English Hub 🎓
 
-> **Plataforma Web EdTech Interactiva para el Aprendizaje Integral de Inglés Técnico (A1 - A2)**  
+> **Plataforma Web EdTech Interactiva para el Aprendizaje Integral de Inglés Técnico (A1 - A2)**
 > Desarrollado por **Bravo** • Estudiante de *Computación e Informática*
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript_ES6_Modules-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Vercel](https://img.shields.io/badge/Vercel-Ready-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Responsive](https://img.shields.io/badge/Design-Responsive-success?style=for-the-badge)
 
@@ -15,39 +15,51 @@
 
 **EASY English Hub** es una aplicación web educativa moderna diseñada como una solución integral (LMS - *Learning Management System*) para el aprendizaje del idioma inglés enfocado en carreras técnicas y profesionales.
 
-A diferencia de las páginas de descarga tradicionales, **EASY English Hub** presenta el 100% de los contenidos directamente en pantalla a través de una experiencia interactiva, modular y multimedia que elimina la necesidad de descargar archivos estáticos (.docx, .pptx o .zip).
+Se presenta el 100% de los contenidos directamente en pantalla a través de una experiencia interactiva, modular y multimedia que elimina la necesidad de descargar archivos estáticos (.docx, .pptx o .zip).
+
+**Arquitectura Multi-Página (MPA):** el portal está dividido en 5 páginas HTML independientes (`index.html`, `aula.html`, `quizzes.html`, `vocabulario.html`, `galeria.html`) con un layout compartido inyectado dinámicamente (`partials/app-shell.html` + `js/layout.js`) y lógica modular en **ES Modules** (JS nativo, sin bundlers).
 
 ---
 
 ## 🚀 Características Principales
 
-### 1. 📊 Panel de Control (Dashboard)
-- Indicadores en tiempo real: lecciones completadas, promedio de evaluaciones, racha de estudio y porcentaje de progreso global.
-- Acceso directo a la última lección sugerida con reanudación automática.
-- Visualización organizada de los 3 módulos académicos semanales.
+### 1. 📊 Panel de Control — `index.html`
+- Indicadores en tiempo real: lecciones completadas, evaluaciones rendidas, términos disponibles y racha de estudio.
+- Acceso directo a la última lección sugerida con reanudación automática (`aula.html` con deep-link).
+- Visualización organizada de los 3 módulos académicos con porcentaje de progreso.
 
-### 2. 📖 Aula Virtual Interactiva (18 Días de Aprendizaje)
-- **Lectura Guiada con Voz Nativa:** Integración con la **Web Speech API** del navegador para escuchar la pronunciación en inglés nativo con controles de velocidad (`0.85x`, `1.0x`, `1.2x`), pausa y reinicio.
-- **Diapositivas Explicativas en Pantalla:** Visor interactivo de láminas con navegación por teclado y botones, presentando reglas gramaticales, estructuras clave y ejemplos prácticos.
-- **Cuaderno de Trabajo Digital (Worksheet):** Bloques de preguntas de comprensión y reflexión con persistencia local (`localStorage`) que guardan automáticamente las respuestas del usuario.
-- **Recursos Complementarios:** Enlaces y recomendaciones pedagógicas estructuradas para cada día.
+### 2. 📖 Aula Virtual — `aula.html?week=N&day=D` (18 Días de Aprendizaje)
+Cada día se organiza en 8 pestañas, con la lección activa registrado en la URL (`tab=`):
 
-### 3. 📝 Hub de Evaluaciones (Quizzes en Tiempo Real)
-- **18 Evaluaciones Interactivas (90 preguntas en total):** 5 preguntas por día con opciones de selección múltiple.
-- **Retroalimentación Inmediata:** Corrección instantánea con explicación pedagógica por cada pregunta.
-- **Cálculo y Guardado de Calificación:** Sistema de puntaje sobre 20 con almacenamiento local y actualización de estadísticas en el Dashboard.
+1. **Teoría Gramática (`tab=theory`)** — Contenido pedagógico completo por día: qué es/ cuándo usar/ formación con tablas estructurales/ reglas de escritura/ marcadores de tiempo/ errores comunes de hispanohablantes y mini-repaso guiado (`js/data/theories.js`).
+2. **Lectura Asistida (`tab=reading`)** — Texto en inglés con pronunciación por **Web Speech API** (velocidades `0.8x`, `1.0x`, `1.2x`), vocabulario clave pronunciable y actividades post-lectura.
+3. **Ficha Práctica (`tab=worksheet`)** — Cuaderno digital con persistencia local de respuestas.
+4. **Autoevaluación Oficial (`tab=quiz`)** — 5 preguntas por día con corrección instantánea y explicación pedagógica.
+5. **Reto Cronometrado (`tab=challenge`)** — 3 preguntas sorteadas del banco del día, **30 segundos por pregunta** (90s totales), reloj visible con barra que pasas a rojo al agotarse el tiempo, sepausa al salir de la pestaña, retroalimentación inmediata y **mejor marca guardada** (`easy_challenge_scores`). Semana 1 funciona con un banco suplementario propio (`js/data/challenge-bank.js`).
+6. **Diapositivas PPT (`tab=slides`)** — Visor interactivo de las láminas oficiales de la semana.
+7. **Recursos & Práctica (`tab=resources`)** — Videos y enlaces recomendados con guía de uso en 3 pasos.
+8. **Infografía del Día (`tab=poster`)** — Afiche visual de la lección con vista a pantalla completa.
 
-### 4. 📚 Centro de Vocabulario y Verbos Técnicos
-- **124 Términos y Verbos Clasificados:** Filtros por categoría gramatical (verbos regulares, irregulares, expresiones de tiempo, rutinas y vocabulario técnico).
-- **Buscador en Tiempo Real:** Filtro rápido por palabra en inglés o español.
+- **Navegación entre días con URL real:** los botones anterior/siguiente cambian de página, el temario lateral permite saltar a cualquier día, y compartir el enlace restaura lección y pestaña exactas.
+- **Botón "Marcar como Completada":** persiste el progreso en `localStorage`.
 
-### 5. 🖼️ Galería Multimedia de Infografías
-- Visor de pósteres y resúmenes visuales de alta resolución con modal *lightbox* para visualización a pantalla completa.
+### 3. 📝 Hub de Evaluaciones — `quizzes.html`
+- **18 Evaluaciones Oficiales:** tarjetas por día con estado pendiente/revisado y puntaje.
+- **Acceso directo al Reto Cronometrado** de cada día (90 segundos).
+- Filtro rápido por semana (Simple Present / Continuous Tenses / Simple Past).
+
+### 4. 📚 Centro de Vocabulario y Verbos — `vocabulario.html`
+- **124 Términos Clasificados:** verbos regulares, irregulares, expresiones de tiempo, rutinas y vocabulario técnico.
+- **Buscador Global:** la búsqueda del topbar (`vocabulario.html?q=...`) pre-filtra el laboratorio.
+- **Audio pronunciable** por tarjeta con la Web Speech API.
+
+### 5. 🖼️ Galería Multimedia — `galeria.html`
+- Visitas múltiple de infografías con modal *lightbox* a pantalla completa, sin duplicados (`seenPosters`).
 
 ### 6. 🎨 Experiencia de Usuario & Accesibilidad
-- **Tema Oscuro / Claro:** Alternancia fluida con guardado de preferencias en `localStorage`.
-- **Diseño Ultra-Responsivo:** Adaptado para teléfonos inteligentes, tablets y monitores de escritorio.
-- **Cero Dependencias Complejas:** Construido con tecnologías web nativas (Vanilla HTML, CSS, JavaScript) para máxima velocidad de carga y rendimiento de 100 en Lighthouse.
+- **Tema Oscuro / Claro** con preferencia guardada.
+- **Diseño-ultrarrresponsivo** con sidebar móvil colapsable, apilado de columnas del aula en pantallas ≤ 1400px y adaptaciones a 900px / 600px.
+- **Cero dependencias complejas:** Vanilla HTML + CSS + JavaScript moderno (Web Speech API, Storage API), carga veloz y sin build.
 
 ---
 
@@ -55,16 +67,38 @@ A diferencia de las páginas de descarga tradicionales, **EASY English Hub** pre
 
 ```text
 EASY/
-├── index.html          # Estructura principal y maquetación de las 5 vistas
-├── vercel.json         # Configuración optimizada de cabeceras para Vercel
-├── .gitignore          # Exclusión de archivos comprimidos y temporales
-├── README.md           # Documentación completa del proyecto
+├── index.html              # Dashboard: métricas, progreso y módulos académicos
+├── aula.html               # Aula Virtual: 8 pestañas x 18 días (la vista principal)
+├── quizzes.html            # Hub de evaluaciones oficiales + acceso al reto
+├── vocabulario.html        # Laboratorio de vocabulario y verbos
+├── galeria.html            # Galería de infografías y afiches
+├── vercel.json             # Configuración optimizada de cabeceras para Vercel
+├── .gitignore              # Exclusión de archivos comprimidos y temporales
+├── README.md               # Documentación (este archivo)
+├── partials/
+│   └── app-shell.html      # Layout compartido (sidebar + topbar + lightbox) inyectado por layout.js
 ├── css/
-│   └── styles.css      # Sistema de diseño con variables CSS, dark mode y componentes
+│   └── styles.css          # Sistema de diseño: variables, dark mode y componentes
 ├── js/
-│   ├── app.js          # Lógica de navegación, reproductor TTS, quizzes y estado
-│   └── course-data.js  # Base de datos estructurada (18 días, 90 quizzes, slides y vocabulario)
-└── archivos/           # Recursos visuales e infografías de las 3 semanas
+│   ├── layout.js           # Monta el shell común alrededor de <template id="pageTemplate">
+│   ├── common.js           # Estado global, tema, progreso, toasts, lightbox, TTS
+│   ├── paginas/            # Lógica por página (ES Modules)
+│   │   ├── dashboard.js    # index.html
+│   │   ├── aula.js         # aula.html (teoría, lectura, ficha, quiz, reto, slides, recursos, póster)
+│   │   ├── quizzes.js      # quizzes.html
+│   │   ├── vocabulario.js  # vocabulario.html (con ?q=)
+│   │   └── galeria.js      # galeria.html
+│   └── data/               # Contenido y datos del curso
+│       ├── course-info.js  # Metadatos del curso
+│       ├── week-1.js       # Semana 1: Simple Present (6 días, cada uno: teoría implícita, lectura, ficha, quiz, recursos, póster)
+│       ├── week-2.js       # Semana 2: Present & Past Continuous
+│       ├── week-3.js       # Semana 3: Simple Past
+│       ├── master-vocabulary.js  # 124 términos del curso
+│       ├── stats.js        # Estadísticas de contenido
+│       ├── theories.js     # Teoría gramatical pedagógica (18 días)
+│       ├── challenge-bank.js     # Banco suplementario MCQ del Reto (Semana 1)
+│       └── index.js        # API central: COURSE_DATA, getWeek(id), getDay(weekId, dayNum)
+└── archivos/               # Recursos visuales e infografías de las 3 semanas
     ├── semana-1/
     ├── semana-2/
     └── semana-3/
@@ -74,17 +108,18 @@ EASY/
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Frontend Core:** HTML5 semántico y accesible.
-- **Estilos:** Vanilla CSS moderno con CSS Custom Properties (Variables), Flexbox, CSS Grid y efectos de Glassmorphism.
+- **Frontend Core:** HTML5 semántico con `<template>` por página y ES Modules nativos.
+- **Estilos:** Vanilla CSS moderno con Custom Properties, Flexbox, CSS Grid y responsive breakpoints.
 - **Tipografía:** Google Fonts (*Outfit* y *Plus Jakarta Sans*).
 - **Iconografía:** Font Awesome 6.
-- **Lógica e Interactividad:** JavaScript moderno (ES6+ modular, Web Speech API, Storage API).
+- **Motor de Voz:** Web Speech API (SpeechSynthesis) para lectura asistida.
+- **Persistencia:** Storage API (`localStorage`) para progreso, quiz, fichas, mediante claves `easy_*`.
 
 ---
 
 ## 💻 Ejecución Local
 
-Para probar el proyecto en tu máquina local:
+> ⚠️ **Importante:** el proyecto usa **ES Modules**, por lo que **no funciona con doble clic (`file://`)** — el navegador bloquea los módulos por CORS y verás solo el fondo oscuro. Usa cualquier servidor HTTP local:
 
 1. **Clonar el repositorio:**
    ```bash
@@ -99,7 +134,7 @@ Para probar el proyecto en tu máquina local:
      ```
      Luego ingresa a `http://localhost:8080` en tu navegador.
    - **Con VS Code:** Instala la extensión **Live Server** y haz clic en *"Go Live"*.
-   - **Con Laragon / XAMPP:** Coloca la carpeta en el directorio `www` o `htdocs` y ábrelo desde tu servidor Apache local.
+   - **Con Laragon / XAMPP:** Coloca la carpeta en el directorio `www` o `htdocs` y ábrelo desde `http://localhost/EASY/` (o el dominio virtual *.test* de Laragon).
 
 ---
 

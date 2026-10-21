@@ -1,0 +1,116 @@
+<!-- Shell compartido de EASY English Hub (inyectado por js/layout.js)
+     El marcador PAGE_CONTENT se reemplaza por el contenido de cada página -->
+<div class="app-shell" id="appShellContainer">
+
+  <aside class="app-sidebar" id="appSidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo-icon">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <div class="sidebar-brand-titles">
+        <h1>EASY English Hub</h1>
+        <div class="sidebar-brand-badge">Dev by Bravo • Computación e Informática</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNavMenu" aria-label="Navegación principal de la plataforma">
+      <span class="nav-section-title">Plataforma Educativa</span>
+
+      <a class="nav-item-btn" data-page="dashboard" href="index.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a class="nav-item-btn" data-page="classroom" href="aula.html">
+        <i class="fa-solid fa-book-open-reader"></i>
+        <span>Aula Virtual</span>
+        <span class="nav-pill-badge">18 Días</span>
+      </a>
+
+      <a class="nav-item-btn" data-page="quizzes" href="quizzes.html">
+        <i class="fa-solid fa-list-check"></i>
+        <span>Evaluaciones</span>
+        <span class="nav-pill-badge">18 Quizzes</span>
+      </a>
+
+      <a class="nav-item-btn" data-page="vocabulary" href="vocabulario.html">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Vocabulario & Verbos</span>
+        <span class="nav-pill-badge">124</span>
+      </a>
+
+      <a class="nav-item-btn" data-page="gallery" href="galeria.html">
+        <i class="fa-solid fa-images"></i>
+        <span>Infografías & Afiches</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="student-card-mini">
+        <div class="student-avatar" style="background: linear-gradient(135deg, var(--primary-600), var(--violet-600)); font-weight: 700; color: white;">BR</div>
+        <div class="student-info">
+          <h4>Bravo</h4>
+          <p>Computación e Informática</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app-viewport">
+
+    <header class="app-topbar" id="appTopbar">
+      <div class="topbar-left">
+        <button type="button" class="btn-sidebar-toggle" id="sidebarToggleBtn" title="Abrir menú de navegación">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="topbar-breadcrumbs" id="topbarBreadcrumbs">
+          <i class="fa-solid fa-compass" style="color: var(--primary-500);"></i>
+          <span class="active-view-name" id="breadcrumbViewName">Inicio</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="topbar-search-box">
+          <i class="fa-solid fa-magnifying-glass topbar-search-icon"></i>
+          <input type="text" class="topbar-search-input" id="topbarSearchInput"
+            placeholder="Buscar vocabulario o tema...">
+        </div>
+
+        <div class="topbar-progress-pill" id="topbarProgressPill" title="Progreso del curso">
+          <i class="fa-solid fa-circle-check" style="color: var(--emerald-500);"></i>
+          <span id="topbarProgressText">0/18 (0%)</span>
+          <div class="topbar-progress-bar">
+            <div class="topbar-progress-fill" id="topbarProgressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-topbar-action" id="themeToggleBtn" title="Cambiar tema de color">
+          <i class="fa-solid fa-sun" id="themeToggleIcon"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-main" id="appMainStage">
+      <!--PAGE_CONTENT-->
+    </main>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="mediaLightboxModal">
+  <div class="modal-window" style="max-width: 950px;">
+    <div class="modal-header">
+      <h3 id="lightboxTitle"><i class="fa-solid fa-image" style="color: var(--primary-500);"></i> Visor de Infografía
+      </h3>
+      <button type="button" class="modal-close-btn" id="lightboxCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="lightboxMediaContainer">
+    </div>
+  </div>
+</div>
+
+<aside class="toast-notice" id="toastNotice" role="status" aria-live="polite">
+  <i class="fa-solid fa-circle-check" style="color: var(--emerald-500);"></i>
+  <span id="toastMessage">Notificación</span>
+</aside>

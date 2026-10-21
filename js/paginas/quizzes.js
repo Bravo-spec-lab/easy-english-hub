@@ -16,29 +16,40 @@ function renderQuizzesHub(filterWeek = 'all') {
     if (filterWeek !== 'all' && w.id !== parseInt(filterWeek, 10)) return;
 
     w.days.forEach(d => {
-      const qKey1 = `w${w.id}-d${d.day}-q1`;
-      const hasStarted = !!state.quizState[qKey1];
+      const dayKey = `w${w.id}-d${d.day}`;
+      const graded = state.quizState[`${dayKey}-graded`] === '1';
       let score = 0;
+      let answered = false;
       if (d.quiz && d.quiz.questions) {
         d.quiz.questions.forEach(q => {
-          const userAns = state.quizState[`w${w.id}-d${d.day}-q${q.num}`];
-          if (userAns && userAns === q.correctOption) score++;
+          const userAns = state.quizState[`${dayKey}-q${q.num}`];
+          if (userAns) answered = true;
+          if (!graded) return;
+          if (Array.isArray(q.options) && q.options.length) {
+            if (userAns === q.correctOption) score++;
+          } else if (state.quizState[`${dayKey}-q${q.num}-mark`] === 'ok') {
+            score++;
+          }
         });
       }
+
+      const status = graded
+        ? `<i class="fa-solid fa-star"></i> Puntaje: ${score}/5`
+        : answered
+          ? '<i class="fa-solid fa-pen-nib"></i> En progreso'
+          : '<i class="fa-regular fa-clock"></i> Pendiente';
 
       const card = document.createElement('div');
       card.className = 'quiz-hub-card';
       card.innerHTML = `
         <div class="quiz-hub-card-header">
           <span class="quiz-hub-badge">Semana ${w.id} • Día ${d.day}</span>
-          <span class="quiz-hub-score ${score >= 4 ? 'passed' : ''}">
-            ${hasStarted ? `<i class="fa-solid fa-star"></i> Puntaje: ${score}/5` : '<i class="fa-regular fa-clock"></i> Pendiente'}
-          </span>
+          <span class="quiz-hub-score ${graded && score >= 4 ? 'passed' : ''}">${status}</span>
         </div>
         <h4>${escapeHTML(d.title)}</h4>
         <p>${escapeHTML(d.learningFocus || '5 preguntas de autoevaluación oficial.')}</p>
         <a class="btn-open-module" href="aula.html?week=${w.id}&day=${d.day}&tab=quiz">
-          <span>${hasStarted ? 'Revisar / Reintentar' : 'Iniciar Evaluación'}</span> <i class="fa-solid fa-arrow-right"></i>
+          <span>${graded ? 'Revisar resultados' : (answered ? 'Continuar evaluación' : 'Iniciar Evaluación')}</span> <i class="fa-solid fa-arrow-right"></i>
         </a>
         <a class="btn-open-module" href="aula.html?week=${w.id}&day=${d.day}&tab=challenge" style="margin-top: 0.6rem; opacity: 0.85;">
           <span><i class="fa-solid fa-stopwatch"></i> Reto Cronometrado (90s)</span>

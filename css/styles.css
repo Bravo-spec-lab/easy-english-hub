@@ -1129,7 +1129,8 @@ body {
 .challenge-review-row.bad .challenge-review-ver { color: #ef4444; }
 .challenge-review-row.timeout .challenge-review-ver { color: #f97316; }
 
-/* Reading Stage */
+/* Flujo de calificación del quiz */
+.option-btn.selected {
 .theory-container {
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);

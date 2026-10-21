@@ -11,6 +11,7 @@ import {
 import { COURSE_DATA, getWeek, getDay } from '../data/index.js';
 import { THEORIES } from '../data/theories.js';
 import { CHALLENGE_BANK } from '../data/challenge-bank.js';
+import { OPEN_ANSWER_KEYS } from '../data/open-answer-keys.js';
 
 // --- Parámetros de la URL: aula.html?week=1&day=2&tab=quiz ---
 const params = new URLSearchParams(window.location.search);
@@ -494,40 +495,58 @@ function renderQuizStage(weekId, dayNum, day) {
   DOM.quizQuestionsWrap.innerHTML = '';
   const dayKey = `w${weekId}-d${dayNum}`;
   const quiz = day.quiz || { questions: [] };
-
-  DOM.masterAnswerBody.classList.remove('active');
-  DOM.masterAnswerIcon.className = 'fa-solid fa-chevron-down';
-
-  DOM.masterAnswerBody.innerHTML = `
-    <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-      <strong style="color: var(--primary-500); display: block; margin-bottom: 0.6rem;"><i class="fa-solid fa-key"></i> Claves Oficiales y Explicación:</strong>
-      ${quiz.questions.map(q => `<div style="margin-bottom: 0.35rem;"><strong>${q.num}.</strong> ${escapeHTML(q.answerKey || 'Respuesta guiada')}</div>`).join('')}
-      ${quiz.generalExplanation ? `<div style="margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--border-color); font-style: italic;">${escapeHTML(quiz.generalExplanation)}</div>` : ''}
-    </div>
-  `;
-
-  let correctCount = 0;
+  const graded = state.quizState[`${dayKey}-graded`] === '1';
   const totalQ = quiz.questions.length;
+
+  // Las claves oficiales solo se revelan al calificar
+  if (graded) {
+    DOM.masterAnswerBody.innerHTML = `
+      <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+        <strong style="color: var(--primary-500); display: block; margin-bottom: 0.6rem;"><i class="fa-solid fa-key"></i> Claves Oficiales y Explicación:</strong>
+        ${quiz.questions.map(q => `<div style="margin-bottom: 0.35rem;"><strong>${q.num}.</strong> ${escapeHTML(q.answerKey || (OPEN_ANSWER_KEYS[dayKey] || [])[q.num - 1] || 'Respuesta guiada')}</div>`).join('')}
+        ${quiz.generalExplanation ? `<div style="margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--border-color); font-style: italic;">${escapeHTML(quiz.generalExplanation)}</div>` : ''}
+      </div>
+    `;
+  } else {
+    DOM.masterAnswerBody.innerHTML = `
+      <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px dashed var(--border-color); text-align: center;">
+        <i class="fa-solid fa-lock" style="color: var(--text-muted);"></i>
+        <span style="color: var(--text-secondary); font-size: 0.9rem;"> Las respuestas correctas se mostrarán cuando termines y califiques tu test.</span>
+      </div>
+    `;
+  }
+
+  const openModels = OPEN_ANSWER_KEYS[dayKey] || [];
+  let correctCount = 0;
 
   quiz.questions.forEach(q => {
     const qKey = `${dayKey}-q${q.num}`;
     const userSelected = state.quizState[qKey] || null;
+    const selfMark = state.quizState[`${qKey}-mark`] || null;
+    const isMCQ = Array.isArray(q.options) && q.options.length > 0;
+
+    if (graded) {
+      if (isMCQ && userSelected === q.correctOption) correctCount++;
+      if (!isMCQ && selfMark === 'ok') correctCount++;
+    }
 
     const card = document.createElement('div');
     card.className = 'question-card';
 
     let optionsHTML = '';
-    if (q.options && q.options.length > 0) {
+    if (isMCQ) {
       optionsHTML = `
         <div class="options-grid">
           ${q.options.map(opt => {
             let optClass = 'option-btn';
-            if (userSelected) {
+            if (!graded) {
+              if (opt.key === userSelected) optClass += ' selected';
+            } else {
               if (opt.key === q.correctOption) optClass += ' correct';
               else if (opt.key === userSelected) optClass += ' incorrect';
             }
             return `
-              <button type="button" class="${optClass}" data-key="${opt.key}" ${userSelected ? 'disabled' : ''}>
+              <button type="button" class="${optClass}" data-key="${opt.key}" ${graded ? 'disabled' : ''}>
                 <span class="option-key">${opt.key})</span>
                 <span>${escapeHTML(opt.text)}</span>
               </button>
@@ -536,36 +555,57 @@ function renderQuizStage(weekId, dayNum, day) {
         </div>
       `;
     } else {
+      const modelText = openModels[q.num - 1] || 'Respuesta guiada';
+      const comparisonHTML = graded ? `
+        <div class="open-review">
+          <div class="open-review-row model">
+            <i class="fa-solid fa-key"></i>
+            <div>${escapeHTML(modelText)}</div>
+          </div>
+          <div class="open-review-row user">
+            <i class="fa-solid fa-user-pen"></i>
+            <div>${escapeHTML(userSelected || '(sin respuesta)')}</div>
+          </div>
+          <div class="open-selfmark">
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">¿Tu respuesta es correcta comparable al modelo?</span>
+            <button type="button" class="btn-selfmark ok ${selfMark === 'ok' ? 'active' : ''}" data-value="ok">
+              <i class="fa-solid fa-check"></i> Correcta
+            </button>
+            <button type="button" class="btn-selfmark bad ${selfMark === 'bad' ? 'active' : ''}" data-value="bad">
+              <i class="fa-solid fa-xmark"></i> Repasar
+            </button>
+          </div>
+        </div>
+      ` : '';
       optionsHTML = `
         <div style="padding-left: 2.5rem;">
-          <input type="text" class="worksheet-input" style="max-width: 450px;" placeholder="Escribe tu respuesta..." value="${escapeHTML(userSelected || '')}" data-openkey="${qKey}">
+          <input type="text" class="worksheet-input" style="max-width: 450px;" placeholder="Escribe tu respuesta..." value="${escapeHTML(userSelected || '')}" data-openkey="${qKey}" ${graded ? 'disabled' : ''}>
         </div>
+        ${comparisonHTML}
       `;
     }
 
-    if (userSelected && userSelected === q.correctOption) {
-      correctCount++;
-    }
-
+    const showFeedback = true;
     card.innerHTML = `
       <div class="question-header">
         <div class="q-num-badge">${q.num}</div>
         <div class="q-text">${escapeHTML(q.question)}</div>
       </div>
       ${optionsHTML}
-      <div class="q-feedback-box ${userSelected ? 'active' : ''}">
+      ${graded ? `
+      <div class="q-feedback-box active">
         <div class="feedback-bubble">
-          <strong><i class="fa-solid fa-circle-info"></i> Explicación Oficial:</strong> ${escapeHTML(q.answerKey || 'Correcto')}
+          <strong><i class="fa-solid fa-circle-info"></i> Explicación:</strong> ${escapeHTML(q.answerKey || openModels[q.num - 1] || 'Respuesta guiada')}
         </div>
-      </div>
+      </div>` : ''}
     `;
 
     card.querySelectorAll('.option-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const optKey = btn.getAttribute('data-key');
-        state.quizState[qKey] = optKey;
+        state.quizState[qKey] = btn.getAttribute('data-key');
         localStorage.setItem('easy_quiz_state', JSON.stringify(state.quizState));
-  renderQuizStage(weekId, dayNum, day);
+        renderQuizStage(weekId, dayNum, day);
+        updateGradeButtonState(dayKey);
       });
     });
 
@@ -574,13 +614,106 @@ function renderQuizStage(weekId, dayNum, day) {
         state.quizState[input.getAttribute('data-openkey')] = input.value;
         localStorage.setItem('easy_quiz_state', JSON.stringify(state.quizState));
       });
+      input.addEventListener('input', updateGradeButtonState.bind(null, dayKey));
+    });
+
+    card.querySelectorAll('.btn-selfmark').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const markKey = `${qKey}-mark`;
+        const val = btn.getAttribute('data-value');
+        state.quizState[markKey] = val;
+        localStorage.setItem('easy_quiz_state', JSON.stringify(state.quizState));
+        renderQuizStage(weekId, dayNum, day);
+      });
     });
 
     DOM.quizQuestionsWrap.appendChild(card);
   });
 
-  DOM.quizScorePill.textContent = `${correctCount} / ${totalQ}`;
+  // Píldora de puntaje: pendiente hasta calificar
+  DOM.quizScorePill.textContent = graded ? `${correctCount} / ${totalQ}` : `Sin calificar (${totalQ} preguntas)`;
+  DOM.masterAnswerBody.classList.remove('active');
+  DOM.masterAnswerIcon.className = graded ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+  if (graded) DOM.masterAnswerBody.classList.add('active');
+
+  const anyAnswer = quiz.questions.some(q => {
+    const qKey = `${dayKey}-q${q.num}`;
+    const isMCQ = Array.isArray(q.options) && q.options.length > 0;
+    if (isMCQ) return !!state.quizState[qKey];
+    const input = DOM.quizQuestionsWrap.querySelector(`[data-openkey="${qKey}"]`);
+    return !!(input && input.value.trim()) || !!state.quizState[qKey];
+  });
+
+  const actions = document.createElement('div');
+  actions.className = 'quiz-actions-bar';
+  actions.innerHTML = `
+    ${graded ? `
+      <span class="quiz-graded-note"><i class="fa-solid fa-circle-check" style="color: #22c55e;"></i> Test calificado. ${quiz.questions.some(q => !Array.isArray(q.options) || q.options.length === 0) ? 'Las preguntas abiertas se puntúan según tu autoevaluación.' : ''}</span>
+    ` : `
+      <button type="button" class="btn-primary-action" id="quizGradeBtn" disabled>
+        <i class="fa-solid fa-clipboard-check"></i> Calificar mi test
+      </button>
+    `}
+    ${!graded ? `
+      <span class="quiz-need-note"><i class="fa-solid fa-circle-info"></i> Responde todas las preguntas para habilitar la calificación.</span>
+    ` : ''}
+    ${anyAnswer || graded ? `
+      <button type="button" class="btn-quiz-reset" id="quizResetBtn">
+        <i class="fa-solid fa-rotate-left"></i> Reiniciar intento
+      </button>
+    ` : ''}
+  `;
+  DOM.quizQuestionsWrap.appendChild(actions);
+
+  const gradeBtn = document.getElementById('quizGradeBtn');
+  if (gradeBtn) {
+    updateGradeButtonState(dayKey);
+    gradeBtn.addEventListener('click', () => {
+      if (!gradeBtn.disabled) {
+        state.quizState[`${dayKey}-graded`] = '1';
+        localStorage.setItem('easy_quiz_state', JSON.stringify(state.quizState));
+        const savedScroll = window.scrollY;
+        renderQuizStage(weekId, dayNum, day);
+        window.scrollTo({ top: savedScroll, behavior: 'smooth' });
+        showToast('Test calificado. Revisa tus resultados y las explicaciones.');
+      }
+    });
+  }
+
+  const resetBtn = document.getElementById('quizResetBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (confirm('¿Reiniciar este intento? Se borrarán tus respuestas y la calificación de este día.')) {
+        Object.keys(state.quizState).forEach(k => {
+          if (k.startsWith(dayKey)) delete state.quizState[k];
+        });
+        localStorage.setItem('easy_quiz_state', JSON.stringify(state.quizState));
+        renderQuizStage(weekId, dayNum, day);
+        showToast('Intento reiniciado. ¡A jugar de nuevo!');
+      }
+    });
+  }
 }
+
+function updateGradeButtonState(dayKey) {
+  const gradeBtn = document.getElementById('quizGradeBtn');
+  if (!gradeBtn) return;
+  const day = getDay(currentWeekId, currentDayNum);
+  const quiz = (day && day.quiz) || { questions: [] };
+  const all = quiz.questions.every(q => {
+    const qKey = `${dayKey}-q${q.num}`;
+    const isMCQ = Array.isArray(q.options) && q.options.length > 0;
+    if (isMCQ) return !!state.quizState[qKey];
+    const input = DOM.quizQuestionsWrap.querySelector(`[data-openkey="${qKey}"]`);
+    return !!(input && input.value.trim()) || !!state.quizState[qKey];
+  });
+  gradeBtn.disabled = !all;
+  gradeBtn.classList.toggle('ready', all);
+}
+
+// =========================================================================
+// Stage 4: Diapositivas
+// =========================================================================
 
 // =========================================================================
 // Stage 4: Diapositivas

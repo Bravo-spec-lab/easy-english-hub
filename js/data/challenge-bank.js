@@ -1,0 +1,110 @@
+/**
+ * EASY English Hub - Banco suplementario del Reto Cronometrado
+ * Cubre los días cuyas preguntas oficiales son de producción abierta (ej. toda la Semana 1).
+ * Desarrollado por Bravo • Computación e Informática
+ */
+
+export const CHALLENGE_BANK = {
+  'w1-d1': [
+    { num: 1, type: 'multiple_choice',
+      question: 'Which subject pronoun completes: "(Ana and Luis) ___ are from Peru."?',
+      options: [{ key: 'A', text: 'He' }, { key: 'B', text: 'She' }, { key: 'C', text: 'They' }],
+      correctOption: 'C',
+      answerKey: '"They" corresponde a dos o más personas (Ana y Luis): tercera persona del plural.' },
+    { num: 2, type: 'multiple_choice',
+      question: 'Which sentence uses the verb To Be correctly?',
+      options: [{ key: 'A', text: '"I am a student at the institute."' }, { key: 'B', text: '"I am study every day."' }, { key: 'C', text: '"I is a student."' }],
+      correctOption: 'A',
+      answerKey: 'am va con I; y los verbos de acción como study no llevan to be.' },
+    { num: 3, type: 'multiple_choice',
+      question: 'Which word is an action verb?',
+      options: [{ key: 'A', text: 'is' }, { key: 'B', text: 'organize' }, { key: 'C', text: 'are' }],
+      correctOption: 'B',
+      answerKey: 'Organize describe una actividad que alguien hace; is/are son partes del verbo to be.' }
+  ],
+  'w1-d2': [
+    { num: 1, type: 'multiple_choice',
+      question: 'Complete: "Carla ___ emails every morning."',
+      options: [{ key: 'A', text: 'check' }, { key: 'B', text: 'checks' }, { key: 'C', text: 'checking' }],
+      correctOption: 'B',
+      answerKey: 'Carla es tercera persona (she) en presente simple afirmativo: checks lleva -s.' },
+    { num: 2, type: 'multiple_choice',
+      question: 'Which is the correct -s form of "study" for he/she?',
+      options: [{ key: 'A', text: 'studys' }, { key: 'B', text: 'studys-es' }, { key: 'C', text: 'studies' }],
+      correctOption: 'C',
+      answerKey: 'Consonante + y cambia a -ies: study → studies.' },
+    { num: 3, type: 'multiple_choice',
+      question: 'Complete: "Diego ___ at a technical institute."',
+      options: [{ key: 'A', text: 'work' }, { key: 'B', text: 'works' }, { key: 'C', text: 'is work' }],
+      correctOption: 'B',
+      answerKey: 'Diego = he, así que el verbo action lleva -s y NO lleva to be.' }
+  ],
+  'w1-d3': [
+    { num: 1, type: 'multiple_choice',
+      question: 'Which sentence is correct?',
+      options: [{ key: 'A', text: '"He doesn\'t works on Sundays."' }, { key: 'B', text: '"He doesn\'t work on Sundays."' }, { key: 'C', text: '"He doesn\'t no work."' }],
+      correctOption: 'B',
+      answerKey: 'Con doesn\'t el verbo vuelve a base: no lleva -s.' },
+    { num: 2, type: 'multiple_choice',
+      question: 'Complete: "They ___ arrive late."',
+      options: [{ key: 'A', text: 'doesn\'t' }, { key: 'B', text: 'don\'t' }, { key: 'C', text: 'not' }],
+      correctOption: 'B',
+      answerKey: 'They usa el auxiliar don\'t (do not) en negativas.' },
+    { num: 3, type: 'multiple_choice',
+      question: 'Correct the error: "She no check the equipment."',
+      options: [{ key: 'A', text: '"She don\'t check the equipment."' }, { key: 'B', text: '"She doesn\'t check the equipment."' }, { key: 'C', text: '"She doesn\'t checks the equipment."' }],
+      correctOption: 'B',
+      answerKey: 'No suelta "no" a lo español: se usa doesn\'t + verbo base.' }
+  ],
+  'w1-d4': [
+    { num: 1, type: 'multiple_choice',
+      question: 'Which question is correct?',
+      options: [{ key: 'A', text: '"Does she work in the morning?"' }, { key: 'B', text: '"Does she works in the morning?"' }, { key: 'C', text: '"She works in the morning?"' }],
+      correctOption: 'A',
+      answerKey: 'Does ya carga la 3ª persona: el verbo va en base y el auxiliar abre la pregunta.' },
+    { num: 2, type: 'multiple_choice',
+      question: 'Complete: "Do you start at 8:00?" — "Yes, ___."',
+      options: [{ key: 'A', text: 'I start' }, { key: 'B', text: 'I do' }, { key: 'C', text: 'yes' }],
+      correctOption: 'B',
+      answerKey: 'La respuesta corta usa el auxiliar: Yes, I do.' },
+    { num: 3, type: 'multiple_choice',
+      question: 'Complete: "___ they study at this institute?"',
+      options: [{ key: 'A', text: 'Does' }, { key: 'B', text: 'Is' }, { key: 'C', text: 'Do' }],
+      correctOption: 'C',
+      answerKey: 'They requiere Do, no Does (que es para he/she/it).' }
+  ],
+  'w1-d5': [
+    { num: 1, type: 'multiple_choice',
+      question: 'Which sentence has the frequency adverb in the right position?',
+      options: [{ key: 'A', text: '"She checks always her schedule."' }, { key: 'B', text: '"She always checks her schedule."' }, { key: 'C', text: '"She checks her schedule always."' }],
+      correctOption: 'B',
+      answerKey: 'El adverbio va ANTES del verbo principal.' },
+    { num: 2, type: 'multiple_choice',
+      question: 'Complete: "She ___ on time." (to be + adverbio)',
+      options: [{ key: 'A', text: 'is always' }, { key: 'B', text: 'always is' }, { key: 'C', text: 'always' }],
+      correctOption: 'A',
+      answerKey: 'Con el verbo to be, el adverbio va DESPUÉS: is always.' },
+    { num: 3, type: 'multiple_choice',
+      question: 'Where do frequency expressions go? ("every day", "on Saturdays")',
+      options: [{ key: 'A', text: 'En medio del verbo: "She every day studies."' }, { key: 'B', text: 'Al final de la oración: "She studies every day."' }, { key: 'C', text: 'Antes del sujeto siempre: "Every day she studies" nunca cambia.' }],
+      correctOption: 'B',
+      answerKey: 'Las expresiones de frecuencia van al final (o al inicio con coma para enfatizar).' }
+  ],
+  'w1-d6': [
+    { num: 1, type: 'multiple_choice',
+      question: 'Which is the complete system? Affirmative → Negative → Question:',
+      options: [{ key: 'A', text: '"I study" → "I don\'t study" → "Do I study?"' }, { key: 'B', text: '"I study" → "I not study" → "Study I?"' }, { key: 'C', text: '"I studies" → "I don\'t studies" → "Do I studies?"' }],
+      correctOption: 'A',
+      answerKey: 'Sistema correcto: auxiliares don\'t/Do + verbo base, sin marcas dobles.' },
+    { num: 2, type: 'multiple_choice',
+      question: 'Complete: "___ I make mistakes?" — "Yes, I do, but I learn from them."',
+      options: [{ key: 'A', text: 'Do' }, { key: 'B', text: 'Does' }, { key: 'C', text: 'Am' }],
+      correctOption: 'A',
+      answerKey: 'I usa Do; y "Yes, I do" es la respuesta corta con auxiliar.' },
+    { num: 3, type: 'multiple_choice',
+      question: 'Find the error: "She study and works."',
+      options: [{ key: 'A', text: 'study → studies' }, { key: 'B', text: 'works → work' }, { key: 'C', text: 'Todo está correcto.' }],
+      correctOption: 'A',
+      answerKey: 'Cada verbo conjugado en 3ª persona lleva su marca: studies.' }
+  ]
+};

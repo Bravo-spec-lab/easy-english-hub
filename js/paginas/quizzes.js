@@ -40,6 +40,9 @@ function renderQuizzesHub(filterWeek = 'all') {
         <a class="btn-open-module" href="aula.html?week=${w.id}&day=${d.day}&tab=quiz">
           <span>${hasStarted ? 'Revisar / Reintentar' : 'Iniciar Evaluación'}</span> <i class="fa-solid fa-arrow-right"></i>
         </a>
+        <a class="btn-open-module" href="aula.html?week=${w.id}&day=${d.day}&tab=challenge" style="margin-top: 0.6rem; opacity: 0.85;">
+          <span><i class="fa-solid fa-stopwatch"></i> Reto Cronometrado (90s)</span>
+        </a>
       `;
 
       grid.appendChild(card);

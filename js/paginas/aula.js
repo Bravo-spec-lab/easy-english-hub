@@ -10,6 +10,7 @@ import {
 } from '../common.js';
 import { COURSE_DATA, getWeek, getDay } from '../data/index.js';
 import { THEORIES } from '../data/theories.js';
+import { CHALLENGE_BANK } from '../data/challenge-bank.js';
 
 // --- Parámetros de la URL: aula.html?week=1&day=2&tab=quiz ---
 const params = new URLSearchParams(window.location.search);
@@ -23,6 +24,7 @@ let DOM = null;
 function initDomCache() {
   DOM = {
   theoryContainer: document.getElementById('theoryContainer'),
+  challengeContainer: document.getElementById('challengeContainer'),
   syllabusAccordion: document.getElementById('syllabusAccordion'),
   stageWeekBadge: document.getElementById('stageWeekBadge'),
   stageLessonTitle: document.getElementById('stageLessonTitle'),
@@ -90,6 +92,7 @@ function renderClassroom(weekId, dayNum) {
   renderReadingStage(day);
   renderWorksheetStage(weekId, dayNum, day);
   renderQuizStage(weekId, dayNum, day);
+  renderChallengeStage(weekId, dayNum);
   renderSlidesStage(week);
   renderResourcesStage(day);
   renderPosterStage(day);
@@ -241,6 +244,252 @@ function renderWorksheetStage(weekId, dayNum, day) {
 // =========================================================================
 // Stage 3: Autoevaluación (Quiz)
 // =========================================================================
+let challengeTimerId = null;
+const CHALLENGE_TIME_PER_Q = 30;
+
+function getChallengeScores() {
+  try {
+    return JSON.parse(localStorage.getItem('easy_challenge_scores')) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveChallengeScore(dayKey, score, total) {
+  const scores = getChallengeScores();
+  const prev = scores[dayKey] || { best: -1, tries: 0 };
+  scores[dayKey] = { best: Math.max(prev.best, score), tries: prev.tries + 1 };
+  localStorage.setItem('easy_challenge_scores', JSON.stringify(scores));
+}
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function renderChallengeStage(weekId, dayNum) {
+  if (!DOM.challengeContainer) return;
+  if (challengeTimerId) { clearInterval(challengeTimerId); challengeTimerId = null; }
+
+  const dayKey = `w${weekId}-d${dayNum}`;
+  const day = getDay(weekId, dayNum);
+  const quiz = (day && day.quiz) || { questions: [] };
+  const bodyValid = q =>
+    q.type === 'multiple_choice' &&
+    Array.isArray(q.options) && q.options.length >= 2 &&
+    q.correctOption && q.options.some(o => o.key === q.correctOption);
+
+  let pool = (quiz.questions || []).filter(bodyValid);
+  if (pool.length < 3) {
+    pool = [...pool, ...(CHALLENGE_BANK[dayKey] || []).filter(bodyValid)];
+  }
+
+  if (pool.length === 0) {
+    DOM.challengeContainer.innerHTML = `
+      <div class="challenge-block" style="text-align: center; padding: 2.5rem 1rem;">
+        <i class="fa-solid fa-circle-info" style="font-size: 2.2rem; color: var(--primary-500); margin-bottom: 1rem; display: block;"></i>
+        <h3 style="font-family: var(--font-heading); margin-bottom: 0.6rem;">Este día usa preguntas de producción abierta</h3>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.2rem;">
+          El día ${dayNum} es de diagnóstico: sus preguntas se responden escribiendo, no eligiendo opciones, así que el reto cronometrado no aplica aquí. Te recomendamos rendir la autoevaluación oficial del día.
+        </p>
+        <button type="button" class="btn-primary-action" id="challengeGoQuizBtn">
+          <i class="fa-solid fa-circle-question"></i> Ir a la Autoevaluación
+        </button>
+      </div>
+    `;
+    const goBtn = document.getElementById('challengeGoQuizBtn');
+    if (goBtn) goBtn.addEventListener('click', () => switchClassroomTab('quiz'));
+    return;
+  }
+
+  const count = Math.min(3, pool.length);
+  const picked = shuffleArray(pool).slice(0, count);
+  const scores = getChallengeScores();
+  const rec = scores[dayKey];
+  const totalSeconds = CHALLENGE_TIME_PER_Q * count;
+
+  DOM.challengeContainer.innerHTML = `
+    <div class="challenge-intro">
+      <div class="challenge-intro-badge"><i class="fa-solid fa-stopwatch"></i> ${count} preguntas • ${CHALLENGE_TIME_PER_Q}s por pregunta • ${totalSeconds}s totales</div>
+      <h3 class="challenge-intro-title">Reto Cronometrado</h3>
+      <p class="challenge-intro-sub">
+        ${picked === pool.slice(0, 3) ? '' : ''}Se sortean ${count} preguntas del banco oficial del día cada vez que juegas. Tienes 30 segundos para responder cada una; si el tiempo se agota, pasa a la siguiente. Tu mejor marca queda guardada.
+      </p>
+      ${rec ? `<div class="challenge-best-score"><i class="fa-solid fa-trophy"></i> Tu mejor marca: <strong>${rec.best} / ${count}</strong> (${rec.tries} intento${rec.tries === 1 ? '' : 's'})</div>` : ''}
+      <button type="button" class="btn-primary-action" id="challengeStartBtn" style="margin-top: 1.2rem;">
+        <i class="fa-solid fa-play"></i> Comenzar el Reto
+      </button>
+    </div>
+  `;
+
+  const startBtn = document.getElementById('challengeStartBtn');
+  if (startBtn) startBtn.addEventListener('click', () => runChallenge(dayKey, picked));
+}
+
+function runChallenge(dayKey, picked) {
+  if (!DOM.challengeContainer) return;
+  let idx = 0;
+  let score = 0;
+  let timeLeft = CHALLENGE_TIME_PER_Q;
+  let results = [];
+
+  showQuestion();
+
+  function showQuestion() {
+    const q = picked[idx];
+    timeLeft = CHALLENGE_TIME_PER_Q;
+    let locked = false;
+
+    DOM.challengeContainer.innerHTML = `
+      <div class="challenge-question-wrap">
+        <div class="challenge-topbar">
+          <span class="challenge-progress">Pregunta <strong>${idx + 1} / ${picked.length}</strong></span>
+          <span class="challenge-timer" id="challengeTimer">${timeLeft}s</span>
+        </div>
+        <div class="challenge-timer-bar"><span class="challenge-fill" id="challengeFill" style="width: 100%;"></span></div>
+        <div class="question-card" style="margin-top: 1.2rem;">
+          <div class="question-header">
+            <div class="q-num-badge">${q.num}</div>
+            <div class="q-text">${escapeHTML(q.question)}</div>
+          </div>
+          <div class="options-grid">
+            ${q.options.map(opt => `
+              <button type="button" class="option-btn" data-key="${escapeHTML(opt.key)}">
+                <span class="option-key">${escapeHTML(opt.key)})</span>
+                <span>${escapeHTML(opt.text)}</span>
+              </button>
+            `).join('')}
+          </div>
+          <div class="q-feedback-box" id="challengeFeedback">
+            <div class="feedback-bubble"></div>
+          </div>
+          <div style="text-align: center; margin-top: 1rem;">
+            <button type="button" class="btn-primary-action" id="challengeNextBtn" style="display: none;">
+              ${idx + 1 < picked.length ? 'Siguiente pregunta <i class="fa-solid fa-arrow-right"></i>' : 'Ver resultados <i class="fa-solid fa-flag-checkered"></i>'}
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    DOM.challengeContainer.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => answer(btn.getAttribute('data-key'), btn, q));
+    });
+
+    if (challengeTimerId) clearInterval(challengeTimerId);
+    challengeTimerId = setInterval(() => {
+      if (!DOM.challengeContainer) return;
+      const panel = document.getElementById('stagePanel_challenge');
+      if (panel && !panel.classList.contains('active')) return;
+      timeLeft--;
+      const timerEl = document.getElementById('challengeTimer');
+      const fillEl = document.getElementById('challengeFill');
+      if (!timerEl) { clearInterval(challengeTimerId); challengeTimerId = null; return; }
+      timerEl.textContent = `${Math.max(0, timeLeft)}s`;
+      if (timeLeft <= 10) {
+        timerEl.classList.add('urgent');
+        fillEl.classList.add('urgent');
+      }
+      fillEl.style.width = `${Math.max(0, (timeLeft / CHALLENGE_TIME_PER_Q) * 100)}%`;
+      if (timeLeft <= 0) {
+        clearInterval(challengeTimerId);
+        challengeTimerId = null;
+        answer(null, null, q);
+      }
+    }, 1000);
+
+    const nextBtn = document.getElementById('challengeNextBtn');
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      idx++;
+      if (idx < picked.length) showQuestion();
+      else finishChallenge();
+    });
+  }
+
+  function answer(optKey, btn, q) {
+    if (optKey !== null) {
+      if (challengeTimerId) {
+        clearInterval(challengeTimerId);
+        challengeTimerId = null;
+      }
+    }
+
+    const btns = DOM.challengeContainer.querySelectorAll('.option-btn');
+    btns.forEach(b => {
+      b.disabled = true;
+      if (b.getAttribute('data-key') === q.correctOption) b.classList.add('correct');
+      else if (optKey !== null && b.getAttribute('data-key') === optKey) b.classList.add('incorrect');
+    });
+
+    const isTimeout = optKey === null;
+    const isCorrect = optKey === q.correctOption;
+    if (isCorrect) score++;
+    results.push({ q, user: optKey, correct: isCorrect, timeout: isTimeout });
+
+    const fb = document.getElementById('challengeFeedback');
+    const bubble = fb ? fb.querySelector('.feedback-bubble') : null;
+    if (bubble) {
+      fb.classList.add('active');
+      bubble.innerHTML = isTimeout
+        ? `<strong><i class="fa-regular fa-clock"></i> Tiempo agotado.</strong> La respuesta correcta era ${escapeHTML(q.correctOption)}. ${escapeHTML(q.answerKey || '')}`
+        : isCorrect
+          ? `<strong><i class="fa-solid fa-circle-check" style="color: #22c55e;"></i> ¡Correcto!</strong> ${escapeHTML(q.answerKey || '')}`
+          : `<strong><i class="fa-solid fa-circle-xmark" style="color: #ef4444;"></i> Incorrecto.</strong> La respuesta correcta era ${escapeHTML(q.correctOption)}. ${escapeHTML(q.answerKey || '')}`;
+    }
+
+    const nextBtn = document.getElementById('challengeNextBtn');
+    if (nextBtn) nextBtn.style.display = 'inline-flex';
+  }
+
+  function finishChallenge() {
+    if (challengeTimerId) { clearInterval(challengeTimerId); challengeTimerId = null; }
+    saveChallengeScore(dayKey, score, picked.length);
+    const total = picked.length;
+    const message = score === total
+      ? '¡Nivel de maestro! Dominas este día sin miedo al reloj.'
+      : score >= Math.ceil(total / 2)
+        ? 'Buen trabajo. Repasa las explicaciones de las que fallaste y vuelve a intentarlo.'
+        : 'No te desanimes: la presión del reloj es una habilidad que se entrena. Revisa la teoría y reintenta.';
+
+    DOM.challengeContainer.innerHTML = `
+      <div class="challenge-result-wrap">
+        <div class="challenge-result-score">
+          <span class="challenge-result-number">${score} / ${total}</span>
+          <span class="challenge-result-label"><i class="fa-solid fa-medal"></i> Resultado</span>
+        </div>
+        <p class="challenge-result-msg">${message}</p>
+        <div class="challenge-review">
+          <h4><i class="fa-solid fa-clipboard-list"></i> Detalle de tus respuestas:</h4>
+          ${results.map((r, i) => `
+            <div class="challenge-review-row ${r.correct ? 'ok' : (r.timeout ? 'timeout' : 'bad')}">
+              <strong>${i + 1}.</strong>
+              <span>${escapeHTML(r.q.question)}</span>
+              <span class="challenge-review-ver">
+                ${r.timeout ? '<i class="fa-regular fa-clock"></i> Tiempo agotado' : (r.correct ? '<i class="fa-solid fa-circle-check"></i> Correcto' : `<i class="fa-solid fa-circle-xmark"></i> Dijiste ${escapeHTML(r.user)} – correcto era ${escapeHTML(r.q.correctOption)}`)}
+              </span>
+            </div>
+          `).join('')}
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+          <button type="button" class="btn-primary-action" id="challengeRetryBtn"><i class="fa-solid fa-rotate-right"></i> Reintentar (nuevas preguntas)</button>
+          <button type="button" class="btn-stage-nav" id="challengeBackBtn"><i class="fa-solid fa-graduation-cap"></i> Volver al inicio del reto</button>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('challengeRetryBtn').addEventListener('click', () => {
+      renderChallengeStage(currentWeekId, currentDayNum);
+    });
+    document.getElementById('challengeBackBtn').addEventListener('click', () => {
+      renderChallengeStage(currentWeekId, currentDayNum);
+    });
+  }
+}
+
 function renderQuizStage(weekId, dayNum, day) {
   DOM.quizQuestionsWrap.innerHTML = '';
   const dayKey = `w${weekId}-d${dayNum}`;
@@ -316,7 +565,7 @@ function renderQuizStage(weekId, dayNum, day) {
         const optKey = btn.getAttribute('data-key');
         state.quizState[qKey] = optKey;
         localStorage.setItem('easy_quiz_state', JSON.stringify(state.quizState));
-        renderQuizStage(weekId, dayNum, day);
+  renderQuizStage(weekId, dayNum, day);
       });
     });
 

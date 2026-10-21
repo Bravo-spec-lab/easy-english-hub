@@ -825,9 +825,19 @@
     if (!DOM.galleryCardsGrid || !window.COURSE_DATA) return;
     DOM.galleryCardsGrid.innerHTML = '';
 
+    const seenPosters = new Set();
+
     window.COURSE_DATA.weeks.forEach(w => {
       w.days.forEach(d => {
         if (!d.posterUrl) return;
+
+        // Si varios días comparten el mismo afiche (como el afiche general), se muestra una sola tarjeta representativa
+        if (seenPosters.has(d.posterUrl)) return;
+        seenPosters.add(d.posterUrl);
+
+        const isGeneral = d.posterUrl.includes('afiche_general');
+        const tagText = isGeneral ? `Semana ${w.id} • Infografía General` : `Semana ${w.id} • Día ${d.day}`;
+        const cardTitle = isGeneral ? `Afiche General: ${escapeHTML(w.title || d.title)}` : escapeHTML(d.title);
 
         const card = document.createElement('div');
         card.className = 'gallery-card';
@@ -839,12 +849,12 @@
                 <span>Infografía Oficial en PDF</span>
               </div>
             ` : `
-              <img src="${d.posterUrl}" class="gallery-thumb-img" alt="${escapeHTML(d.title)}" loading="lazy">
+              <img src="${d.posterUrl}" class="gallery-thumb-img" alt="${cardTitle}" loading="lazy">
             `}
           </div>
           <div class="gallery-card-body">
-            <span class="gallery-card-tag">Semana ${w.id} • Día ${d.day}</span>
-            <h4 class="gallery-card-title">${escapeHTML(d.title)}</h4>
+            <span class="gallery-card-tag">${tagText}</span>
+            <h4 class="gallery-card-title">${cardTitle}</h4>
           </div>
         `;
 

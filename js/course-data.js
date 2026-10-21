@@ -19,7 +19,7 @@ window.COURSE_DATA = {
       "description": "Domina el Presente Simple, hábitos profesionales en el entorno laboral, expresiones de tiempo y frecuencia.",
       "badge": "Semana 1 • Simple Present",
       "pptxName": "SEMANA N° 1. My Professional Routine.pptx",
-      "generalPosterUrl": null,
+      "generalPosterUrl": "archivos/semana-1/afiche_general_curso.png",
       "days": [
         {
           "day": 1,
@@ -112,8 +112,8 @@ window.COURSE_DATA = {
             "Step 3:",
             "Finally, say 3 sentences aloud using the day's grammar."
           ],
-          "posterUrl": "archivos/semana-1/afiche_general_curso.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-1/dia-1/D1_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [
               {
@@ -256,8 +256,8 @@ window.COURSE_DATA = {
             "Step 2: Watch again and write 5 useful words or expressions.",
             "Step 3: Finally, say 3 sentences aloud using the day's grammar."
           ],
-          "posterUrl": "archivos/semana-1/dia-2/D2_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-1/dia-2/D2_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [],
             "guide": [
@@ -379,8 +379,8 @@ window.COURSE_DATA = {
             "Step 2: Watch again and write 5 useful words or expressions.",
             "Step 3: Finally, say 3 sentences aloud using the day's grammar."
           ],
-          "posterUrl": "archivos/semana-1/dia-3/D3_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-1/dia-3/D3_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [],
             "guide": [
@@ -500,8 +500,8 @@ window.COURSE_DATA = {
             "Step 2: Watch again and write 5 useful words or expressions.",
             "Step 3: Finally, say 3 sentences aloud using the day's grammar."
           ],
-          "posterUrl": "archivos/semana-1/dia-4/D4_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-1/dia-4/D4_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [],
             "guide": [
@@ -625,8 +625,8 @@ window.COURSE_DATA = {
             "Step 2: Watch again and write 5 useful words or expressions.",
             "Step 3: Finally, say 3 sentences aloud using the day's grammar."
           ],
-          "posterUrl": "archivos/semana-1/dia-5/D5_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-1/dia-5/D5_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [],
             "guide": [
@@ -750,8 +750,8 @@ window.COURSE_DATA = {
             "Step 2: Watch again and write 5 useful words or expressions.",
             "Step 3: Finally, say 3 sentences aloud using the day's grammar."
           ],
-          "posterUrl": "archivos/semana-1/dia-6/D6_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-1/dia-6/D6_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [],
             "guide": [
@@ -1086,8 +1086,8 @@ window.COURSE_DATA = {
             "Step 3:",
             "Write one more sentence about a temporary activity this week and read all four aloud."
           ],
-          "posterUrl": "archivos/semana-2/dia-1/D1_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-2/dia-1/D1_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [
               {
@@ -2511,8 +2511,8 @@ window.COURSE_DATA = {
             "Step 3:",
             "Write and say aloud four affirmative sentences about what you completed yesterday at work or in class."
           ],
-          "posterUrl": "archivos/semana-3/dia-1/D1_Afiche.pdf",
-          "posterType": "pdf",
+          "posterUrl": "archivos/semana-3/dia-1/D1_Afiche.png",
+          "posterType": "image",
           "digitalResources": {
             "links": [
               {

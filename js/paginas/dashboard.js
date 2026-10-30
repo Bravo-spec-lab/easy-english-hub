@@ -1,6 +1,6 @@
 ﻿/**
- * EASY English Hub - PÃ¡gina Dashboard
- * Desarrollado por Bravo â€¢ ComputaciÃ³n e InformÃ¡tica
+ * EASY English Hub - Página Dashboard
+ * Desarrollado por Bravo • Computación e Informática
  */
 
 import { mountPage } from '../layout.js';
@@ -30,7 +30,7 @@ function renderDashboard() {
   }
   if (dashQuizzesText) dashQuizzesText.textContent = `${answeredQuizzes} / ${totalDays}`;
   if (dashVocabText) dashVocabText.textContent = COURSE_DATA.masterVocabulary.length;
-  if (dashStreakText) dashStreakText.textContent = completedCount > 0 ? `${completedCount} DÃ­as` : 'Comienza hoy';
+  if (dashStreakText) dashStreakText.textContent = completedCount > 0 ? `${completedCount} Días` : 'Comienza hoy';
 
   let nextWeek = 1;
   let nextDay = 1;
@@ -51,10 +51,10 @@ function renderDashboard() {
   const nextDayData = nextWeekData ? nextWeekData.days.find(d => d.day === nextDay) : null;
 
   if (dashContinueTitle && nextDayData) {
-    dashContinueTitle.textContent = `Semana ${nextWeek} â€¢ DÃ­a ${nextDay}: ${nextDayData.title}`;
+    dashContinueTitle.textContent = `Semana ${nextWeek} • Día ${nextDay}: ${nextDayData.title}`;
   }
   if (dashContinueSub && nextDayData) {
-    dashContinueSub.textContent = nextDayData.learningFocus || 'ContinÃºa con la siguiente lecciÃ³n guiada.';
+    dashContinueSub.textContent = nextDayData.learningFocus || 'Continúa con la siguiente lección guiada.';
   }
   if (dashContinueBtn) {
     dashContinueBtn.href = `aula.html?week=${nextWeek}&day=${nextDay}`;
@@ -71,13 +71,13 @@ function renderDashboard() {
       card.innerHTML = `
         <div class="mod-header-row">
           <span class="mod-badge-pill">${w.badge}</span>
-          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-calendar-check"></i> ${completedInWeek}/6 DÃ­as</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-calendar-check"></i> ${completedInWeek}/6 Días</span>
         </div>
         <h4 class="mod-title">${w.title}</h4>
         <p class="mod-desc">${w.description}</p>
         <div class="mod-progress-box">
           <div class="mod-progress-labels">
-            <span>Progreso del mÃ³dulo</span>
+            <span>Progreso del módulo</span>
             <span>${pct}%</span>
           </div>
           <div class="mod-progress-track">

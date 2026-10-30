@@ -890,7 +890,7 @@ export const masterVocabulary = [
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "medicine-label guide = guÃ­a de etiquetas de medicina",
+    "term": "medicine-label guide = guía de etiquetas de medicina",
     "week": 4,
     "day": 1,
     "lesson": "Present Perfect: First Steps",
@@ -904,7 +904,7 @@ export const masterVocabulary = [
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "useful results = resultados Ãºtiles",
+    "term": "useful results = resultados útiles",
     "week": 4,
     "day": 1,
     "lesson": "Present Perfect: First Steps",
@@ -960,7 +960,7 @@ export const masterVocabulary = [
     "category": "Verbos Irregulares"
   },
   {
-    "term": "user guide = guÃ­a de usuario",
+    "term": "user guide = guía de usuario",
     "week": 4,
     "day": 2,
     "lesson": "Irregular Verb Lab: V1, V2 & V3",
@@ -974,7 +974,7 @@ export const masterVocabulary = [
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "safety inspection = inspecciÃ³n de seguridad",
+    "term": "safety inspection = inspección de seguridad",
     "week": 4,
     "day": 2,
     "lesson": "Irregular Verb Lab: V1, V2 & V3",
@@ -995,14 +995,14 @@ export const masterVocabulary = [
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "webpage = pÃ¡gina web",
+    "term": "webpage = página web",
     "week": 4,
     "day": 3,
     "lesson": "Present Perfect: Achievements & Results",
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "demonstration = demostraciÃ³n",
+    "term": "demonstration = demostración",
     "week": 4,
     "day": 3,
     "lesson": "Present Perfect: Achievements & Results",
@@ -1030,21 +1030,21 @@ export const masterVocabulary = [
     "category": "Verbos Regulares"
   },
   {
-    "term": "haven't = have not (no heâ€¦)",
+    "term": "haven't = have not (no he…)",
     "week": 4,
     "day": 4,
     "lesson": "Present Perfect: Negative Sentences",
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "hasn't = has not (no haâ€¦)",
+    "term": "hasn't = has not (no ha…)",
     "week": 4,
     "day": 4,
     "lesson": "Present Perfect: Negative Sentences",
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "not yet = aÃºn no",
+    "term": "not yet = aún no",
     "week": 4,
     "day": 4,
     "lesson": "Present Perfect: Negative Sentences",
@@ -1121,7 +1121,7 @@ export const masterVocabulary = [
     "category": "Vocabulario Profesional"
   },
   {
-    "term": "online meeting = reuniÃ³n virtual",
+    "term": "online meeting = reunión virtual",
     "week": 4,
     "day": 5,
     "lesson": "Have You Ever? Questions & Answers",

@@ -26,7 +26,7 @@ Se presenta el 100% de los contenidos directamente en pantalla a través de una 
 ### 1. 📊 Panel de Control — `index.html`
 - Indicadores en tiempo real: lecciones completadas, evaluaciones rendidas, términos disponibles y racha de estudio.
 - Acceso directo a la última lección sugerida con reanudación automática (`aula.html` con deep-link).
-- Visualización organizada de los 3 módulos académicos con porcentaje de progreso.
+- Visualización organizada de los 4 módulos académicos (semanas del curso) con porcentaje de progreso.
 
 ### 2. 📖 Aula Virtual — `aula.html?week=N&day=D` (24 Días de Aprendizaje)
 Cada día se organiza en 8 pestañas, con la lección activa registrado en la URL (`tab=`):
@@ -34,8 +34,8 @@ Cada día se organiza en 8 pestañas, con la lección activa registrado en la UR
 1. **Teoría Gramática (`tab=theory`)** — Contenido pedagógico completo por día: qué es/ cuándo usar/ formación con tablas estructurales/ reglas de escritura/ marcadores de tiempo/ errores comunes de hispanohablantes y mini-repaso guiado (`js/data/theories.js`).
 2. **Lectura Asistida (`tab=reading`)** — Texto en inglés con pronunciación por **Web Speech API** (velocidades `0.8x`, `1.0x`, `1.2x`), vocabulario clave pronunciable y actividades post-lectura.
 3. **Ficha Práctica (`tab=worksheet`)** — Cuaderno digital con persistencia local de respuestas.
-4. **Autoevaluación Oficial (`tab=quiz`)** — 5 preguntas por día con corrección instantánea y explicación pedagógica.
-5. **Reto Cronometrado (`tab=challenge`)** — 3 preguntas sorteadas del banco del día, **30 segundos por pregunta** (90s totales), reloj visible con barra que pasas a rojo al agotarse el tiempo, sepausa al salir de la pestaña, retroalimentación inmediata y **mejor marca guardada** (`easy_challenge_scores`). Semana 1 funciona con un banco suplementario propio (`js/data/challenge-bank.js`).
+4. **Autoevaluación Oficial (`tab=quiz`)** — 5 preguntas por día (mixtas MCQ + producción abierta). Las respuestas quedan ocultas hasta pulsar **"Calificar mi test"**: las MCQ se corrigen al instante y las abiertas muestran la respuesta modelo para autoevaluación.
+5. **Reto Cronometrado (`tab=challenge`)** — 3 preguntas por día, **30 segundos por pregunta** (90s totales), reloj visible con barra que pasa a rojo al agotarse el tiempo, se pausa al salir de la pestaña, retroalimentación inmediata y **mejor marca guardada** (`easy_challenge_scores`). Semana 1 usa un banco suplementario propio (`js/data/challenge-bank.js`); las demás semanas toman sus preguntas MCQ de la autoevaluación del día.
 6. **Diapositivas PPT (`tab=slides`)** — Visor interactivo de las láminas oficiales de la semana.
 7. **Recursos & Práctica (`tab=resources`)** — Videos y enlaces recomendados con guía de uso en 3 pasos.
 8. **Infografía del Día (`tab=poster`)** — Afiche visual de la lección con vista a pantalla completa.
@@ -93,7 +93,7 @@ EASY/
 │       ├── week-1.js       # Semana 1: Simple Present (6 días, cada uno: teoría implícita, lectura, ficha, quiz, recursos, póster)
 │       ├── week-2.js       # Semana 2: Present & Past Continuous
 │       ├── week-3.js       # Semana 3: Simple Past
-        ¦       ¦   week-4.js       # Semana 4: Present Perfect
+│       ├── week-4.js       # Semana 4: Present Perfect
 │       ├── master-vocabulary.js  # 168 términos del curso
 │       ├── stats.js        # Estadísticas de contenido
 │       ├── theories.js     # Teoría gramatical pedagógica (24 días)
@@ -102,7 +102,8 @@ EASY/
 └── archivos/               # Recursos visuales e infografías de las 4 semanas
     ├── semana-1/
     ├── semana-2/
-    └── semana-3/
+    ├── semana-3/
+    └── semana-4/           # D1 a D6: afiche PDF + PNG por día
 ```
 
 ---

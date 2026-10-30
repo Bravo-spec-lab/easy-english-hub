@@ -843,5 +843,193 @@ export const THEORIES = {
   <div class="theory-tip">
     <strong><i class="fa-solid fa-lightbulb"></i> Proyecto final del curso:</strong> escribe la crónica de TU ayer para tu carrera: 10 oraciones en Simple Past, conectores First/Then/Next/Finally + 3 WH-questions que alguien podría hacerte sobre tu día. ¡Semana 3 completada — bases del inglés profesional conquistadas!
   </div>
+  `,
+  'w4-d1': `
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-award"></i> ¿Qué es el Present Perfect?</h3>
+    <p>Es el tiempo de <strong>los logros y experiencias con conexión al presente</strong>. La acción empezó y terminó en el pasado, pero el <strong>resultado sirve ahora</strong>: <em>“Valeria has prepared a medicine-label guide.”</em> — la guía existe hoy. No se menciona cuándo exactamente.</p>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-scale-balanced"></i> ¿Present Perfect o Simple Present?</h3>
+    <ul class="theory-list">
+      <li><strong>Simple Present</strong>: rutina o verdad general — <em>“She prepares reports every day.”</em></li>
+      <li><strong>Present Perfect</strong>: acción terminada con resultado actual — <em>“She has prepared a report.”</em></li>
+      <li><strong>Present Continuous</strong>: acción en curso — <em>“She is preparing a report now.”</em></li>
+    </ul>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-diagram-project"></i> ¿Cómo se forma?</h3>
+    <table class="theory-table">
+      <tr><th>Sujeto</th><th>Have / Has</th><th>V3 (participio)</th><th>Ejemplo</th></tr>
+      <tr><td>I / you / we / they</td><td>have</td><td>completed</td><td>I have completed a task.</td></tr>
+      <tr><td>he / she / it</td><td>has</td><td>prepared</td><td>She has prepared a report.</td></tr>
+    </table>
+    <p>Con <strong>have</strong>: I, you, we, they. Con <strong>has</strong>: he, she, it.</p>
+  </div>
+
+  <div class="theory-warn">
+    <strong><i class="fa-solid fa-bolt"></i> Errores típicos a evitar:</strong>
+    <ul>
+      <li>Usar V2 después de have/has: <em>“She has wrote a report.”</em> ✗ → <em>“She has written a report.”</em> ✓ (El Participio es V3.)</li>
+      <li>Conectar con tiempo pasado explícito: <em>“I have completed it yesterday.”</em> ✗ — si la fecha importa, usa Simple Past.</li>
+    </ul>
+  </div>
+
+  <div class="theory-tip">
+    <strong><i class="fa-solid fa-lightbulb"></i> Prueba real en tu carrera:</strong> escribe 3 oraciones con have/has + V3 sobre cosas que ya preparaste o terminaste: <em>“I have checked the report.”</em> — el resultado presente lo dice todo. Primer beneficio del Present Perfect: la conexión con el presente.
+  </div>
+  `,
+
+  'w4-d2': `
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-layer-group"></i> Verbos irregulares: V1, V2 & V3</h3>
+    <p>Un verbo irregular se estudia como <strong>una familia de tres formas</strong>: <strong>V1</strong> (base), <strong>V2</strong> (Simple Past) y <strong>V3</strong> (past participle). El Present Perfect <strong>solo usa V3</strong>: <em>“She has written a report.”</em> — nunca V2 (<em>“has wrote”</em> es incorrecto).</p>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-diagram-project"></i> Familias V1-V2-V3 del día</h3>
+    <table class="theory-table">
+      <tr><th>V1</th><th>V2</th><th>V3</th><th>Significado</th></tr>
+      <tr><td>write</td><td>wrote</td><td>written</td><td>escribir</td></tr>
+      <tr><td>make</td><td>made</td><td>made</td><td>hacer / preparar</td></tr>
+      <tr><td>take</td><td>took</td><td>taken</td><td>llevar / tomar</td></tr>
+      <tr><td>see</td><td>saw</td><td>seen</td><td>ver</td></tr>
+      <tr><td>do</td><td>did</td><td>done</td><td>hacer / realizar</td></tr>
+      <tr><td>choose</td><td>chose</td><td>chosen</td><td>elegir</td></tr>
+    </table>
+    <p>Método: memoriza <strong>V1 → V2 → V3 en bloque</strong>, como una familia; la tercera forma (V3) es la clave del Present Perfect.</p>
+  </div>
+
+  <div class="theory-warn">
+    <strong><i class="fa-solid fa-bolt"></i> Errores típicos a evitar:</strong>
+    <ul>
+      <li>Usar V2 en Present Perfect: <em>“She has wrote a summary.”</em> ✗ → <em>“She has written a summary.”</em> ✓</li>
+      <li>Pensar que los irregulares tôman -ed: <em>“They have doed it.”</em> ✗ → <em>“They have done it.”</em> ✓</li>
+    </ul>
+  </div>
+
+  <div class="theory-tip">
+    <strong><i class="fa-solid fa-lightbulb"></i> Banco personal:</strong> prepara tu pequeño <strong>banco de verbos irregulares</strong> V1-V2-V3 en tu cuaderno y practica con las 6 familias del texto (write, make, take, see, do, choose). Describe logros profesionales con cada familia.
+  </div>
+  `,
+
+  'w4-d3': `
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-rocket"></i> Logros y resultados con Present Perfect</h3>
+    <p>El Present Perfect <strong>conecta lo que ya lograste con lo que puedes usar ahora</strong>: <em>“Andrea has created a digital invoice template, so the team can use it now.”</em> — una acción del pasado que deja algo <strong>vigente hoy</strong>.</p>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-diagram-project"></i> Contracciones reales</h3>
+    <table class="theory-table">
+      <tr><th>Forma completa</th><th>Contracción</th><th>Ejemplo</th></tr>
+      <tr><td>I have</td><td>I've</td><td>I've used accounting software.</td></tr>
+      <tr><td>she has</td><td>she's</td><td>She's finished the report.</td></tr>
+      <tr><td>we have</td><td>we've</td><td>We've shared our results.</td></tr>
+    </table>
+    <p>La contracción <em>she's</em> también significa <em>she is</em>: la diferencia es que seguida de un <strong>participio V3</strong> se lee <em>has</em>.</p>
+  </div>
+
+  <div class="theory-warn">
+    <strong><i class="fa-solid fa-bolt"></i> Errores típicos a evitar:</strong>
+    <ul>
+      <li>Incluir tiempo pasado terminado: <em>“She has finished the report yesterday.”</em> ✗</li>
+      <li>Concordancia sujeto-auxiliar: <em>“She have prepared…”</em> ✗ → <em>“She has prepared…”</em> ✓</li>
+    </ul>
+  </div>
+
+  <div class="theory-tip">
+    <strong><i class="fa-solid fa-lightbulb"></i> Reto del día:</strong> escribe 4 logros grandes de tu carrera con have/has + V3 e <strong>incluye 2 participios irregulares</strong>: <em>“We have built a useful project.”</em>
+  </div>
+  `,
+
+  'w4-d4': `
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-circle-xmark"></i> Present Perfect negativo</h3>
+    <p>Describe <strong>lo que AÚN no has hecho hasta ahora</strong> con <strong>have/has + not + V3</strong>. Formas cortas: <strong>haven't</strong> / <strong>hasn't</strong>: <em>“I haven't finished the form.”</em> · <em>“She hasn't sent the message.”</em></p>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-diagram-project"></i> Estructura y posición de YET</h3>
+    <table class="theory-table">
+      <tr><th>Sujeto</th><th>Forma corta</th><th>+ V3</th><th>Ejemplo con YET</th></tr>
+      <tr><td>I / you / we / they</td><td>haven't</td><td>submitted</td><td>They haven't submitted the report yet.</td></tr>
+      <tr><td>he / she / it</td><td>hasn't</td><td>sent</td><td>She hasn't sent the email yet.</td></tr>
+    </table>
+    <p><strong>yet</strong> va al final y significa “todavía no” — aparece para describir pendientes, en negaciones. <strong>already</strong> también va al final, en afirmaciones (“ya lo hice”).</p>
+  </div>
+
+  <div class="theory-warn">
+    <strong><i class="fa-solid fa-bolt"></i> Errores típicos a evitar:</strong>
+    <ul>
+      <li>Doble negación: <em>“I haven't never used it.”</em> ✗ → <em>“I have never used it.”</em> ✓</li>
+      <li>Yet entre has y V3: <em>“She has yet finished…”</em> ✗ — yet va <strong>al final</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="theory-tip">
+    <strong><i class="fa-solid fa-lightbulb"></i> Reto del día:</strong> escribe 4 tareas de tu semana que <strong>aún no</strong> completas con haven't/hasn't + V3 y <strong>yet al final</strong>: <em>“I haven't sent the final report yet.”</em>
+  </div>
+  `,
+
+  'w4-d5': `
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-comments"></i> Preguntas de experiencia con EVER</h3>
+    <p><strong>Have/Has + sujeto + (ever) + V3 + ?</strong> pregunta <strong>alguna vez</strong>: <em>“Have you ever used Excel?”</em> — sin fecha, solo experiencia de vida o profesional.</p>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-diagram-project"></i> Preguntar y responder</h3>
+    <table class="theory-table">
+      <tr><th>Pregunta</th><th>Short answer (+)</th><th>Short answer (-)</th></tr>
+      <tr><td>Have you ever written a report?</td><td>Yes, I have.</td><td>No, I haven't.</td></tr>
+      <tr><td>Has she ever visited a laboratory?</td><td>Yes, she has.</td><td>No, she hasn't.</td></tr>
+    </table>
+    <p><strong>ever</strong> = alguna vez · <strong>never</strong> = nunca (en una afirmación con significado negativo): <em>“I have never taken one.”</em></p>
+  </div>
+
+  <div class="theory-warn">
+    <strong><i class="fa-solid fa-bolt"></i> Errores típicos a evitar:</strong>
+    <ul>
+      <li>Auxiliar incorrecto con la persona: <em>“Has you ever…?”</em> ✗ → <em>“Have you ever…?”</em> ✓ (con you).</li>
+      <li>Devolver Simple Past para experiencia sin fecha: <em>“Did you ever used Excel?”</em> ✗ → <em>“Have you ever used Excel?”</em> ✓</li>
+    </ul>
+  </div>
+
+  <div class="theory-tip">
+    <strong><i class="fa-solid fa-lightbulb"></i> Mini-entrevista:</strong> formula 4 preguntas <strong>Have you ever…?</strong> sobre tu carrera y practica respuestas cortas con un compañero (Yes, I have / No, I haven't).
+  </div>
+  `,
+
+  'w4-d6': `
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-box-open"></i> Integración: mi portafolio de experiencias</h3>
+    <p>La Semana 4 cierra con un <strong>portafolio de experiencias</strong> que combina las tres formas: <em>(+) I have written a report.</em> · <em>(-) She hasn't uploaded the file yet.</em> · <em>(?) Have you ever taken a course? — Yes, I have.</em></p>
+  </div>
+
+  <div class="theory-block">
+    <h3><i class="fa-solid fa-code-compare"></i> Simple Past vs Present Perfect</h3>
+    <table class="theory-table">
+      <tr><th>Situación</th><th>Simple Past (V2)</th><th>Present Perfect (V3)</th></tr>
+      <tr><td>Con fecha terminada</td><td>She finished it yesterday.</td><td>She has finished it (resultado presente).</td></tr>
+      <tr><td>Negativo</td><td>She didn't finish it.</td><td>She hasn't finished it yet.</td></tr>
+      <tr><td>Pregunta</td><td>Did she finish it?</td><td>Has she finished it yet?</td></tr>
+    </table>
+    <p>Regla clave: <strong>fecha terminada = Simple Past</strong>; <strong>resultado o experiencia abierta = Present Perfect</strong>.</p>
+  </div>
+
+  <div class="theory-warn">
+    <strong><i class="fa-solid fa-bolt"></i> Errores típicos a evitar:</strong>
+    <ul>
+      <li>Mezclar have/has con V2: <em>“She has wrote.”</em> ✗ → <em>“She has written.”</em> ✓</li>
+      <li>Usar Present Perfect con “yesterday”: <em>“I have prepared it yesterday.”</em> ✗ → <em>“I prepared it yesterday.”</em> ✓</li>
+    </ul>
+  </div>
+
+  <div class="theory-tip">
+    <strong><i class="fa-solid fa-lightbulb"></i> Evidencia de la Semana 4:</strong> tu <strong>banco de 12 familias V1-V2-V3</strong> + un <strong>mini-portafolio</strong> de 4 oraciones: 2 logros (+), 1 pendiente (- con yet) y 1 pregunta de experiencia con respuesta corta. ¡Semana 4 completada — seis días de Present Perfect conquistados!
+  </div>
   `
 };

@@ -1,6 +1,6 @@
-/**
- * EASY English Hub - Página Dashboard
- * Desarrollado por Bravo • Computación e Informática
+﻿/**
+ * EASY English Hub - PÃ¡gina Dashboard
+ * Desarrollado por Bravo â€¢ ComputaciÃ³n e InformÃ¡tica
  */
 
 import { mountPage } from '../layout.js';
@@ -8,7 +8,7 @@ import { state, escapeHTML } from '../common.js';
 import { COURSE_DATA } from '../data/index.js';
 
 function renderDashboard() {
-  const totalDays = 18;
+  const totalDays = 24;
   const completedCount = state.completedDays.length;
 
   const dashCompletedText = document.getElementById('dashCompletedText');
@@ -23,19 +23,19 @@ function renderDashboard() {
   if (dashCompletedText) dashCompletedText.textContent = `${completedCount} / ${totalDays}`;
 
   let answeredQuizzes = 0;
-  for (let w = 1; w <= 3; w++) {
+  for (let w = 1; w <= 4; w++) {
     for (let d = 1; d <= 6; d++) {
       if (state.quizState[`w${w}-d${d}-q1`]) answeredQuizzes++;
     }
   }
   if (dashQuizzesText) dashQuizzesText.textContent = `${answeredQuizzes} / ${totalDays}`;
   if (dashVocabText) dashVocabText.textContent = COURSE_DATA.masterVocabulary.length;
-  if (dashStreakText) dashStreakText.textContent = completedCount > 0 ? `${completedCount} Días` : 'Comienza hoy';
+  if (dashStreakText) dashStreakText.textContent = completedCount > 0 ? `${completedCount} DÃ­as` : 'Comienza hoy';
 
   let nextWeek = 1;
   let nextDay = 1;
   let found = false;
-  for (let w = 1; w <= 3; w++) {
+  for (let w = 1; w <= 4; w++) {
     for (let d = 1; d <= 6; d++) {
       if (!state.completedDays.includes(`w${w}-d${d}`)) {
         nextWeek = w;
@@ -51,10 +51,10 @@ function renderDashboard() {
   const nextDayData = nextWeekData ? nextWeekData.days.find(d => d.day === nextDay) : null;
 
   if (dashContinueTitle && nextDayData) {
-    dashContinueTitle.textContent = `Semana ${nextWeek} • Día ${nextDay}: ${nextDayData.title}`;
+    dashContinueTitle.textContent = `Semana ${nextWeek} â€¢ DÃ­a ${nextDay}: ${nextDayData.title}`;
   }
   if (dashContinueSub && nextDayData) {
-    dashContinueSub.textContent = nextDayData.learningFocus || 'Continúa con la siguiente lección guiada.';
+    dashContinueSub.textContent = nextDayData.learningFocus || 'ContinÃºa con la siguiente lecciÃ³n guiada.';
   }
   if (dashContinueBtn) {
     dashContinueBtn.href = `aula.html?week=${nextWeek}&day=${nextDay}`;
@@ -71,13 +71,13 @@ function renderDashboard() {
       card.innerHTML = `
         <div class="mod-header-row">
           <span class="mod-badge-pill">${w.badge}</span>
-          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-calendar-check"></i> ${completedInWeek}/6 Días</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;"><i class="fa-solid fa-calendar-check"></i> ${completedInWeek}/6 DÃ­as</span>
         </div>
         <h4 class="mod-title">${w.title}</h4>
         <p class="mod-desc">${w.description}</p>
         <div class="mod-progress-box">
           <div class="mod-progress-labels">
-            <span>Progreso del módulo</span>
+            <span>Progreso del mÃ³dulo</span>
             <span>${pct}%</span>
           </div>
           <div class="mod-progress-track">

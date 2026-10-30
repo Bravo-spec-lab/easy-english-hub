@@ -28,7 +28,7 @@ Se presenta el 100% de los contenidos directamente en pantalla a través de una 
 - Acceso directo a la última lección sugerida con reanudación automática (`aula.html` con deep-link).
 - Visualización organizada de los 3 módulos académicos con porcentaje de progreso.
 
-### 2. 📖 Aula Virtual — `aula.html?week=N&day=D` (18 Días de Aprendizaje)
+### 2. 📖 Aula Virtual — `aula.html?week=N&day=D` (24 Días de Aprendizaje)
 Cada día se organiza en 8 pestañas, con la lección activa registrado en la URL (`tab=`):
 
 1. **Teoría Gramática (`tab=theory`)** — Contenido pedagógico completo por día: qué es/ cuándo usar/ formación con tablas estructurales/ reglas de escritura/ marcadores de tiempo/ errores comunes de hispanohablantes y mini-repaso guiado (`js/data/theories.js`).
@@ -44,12 +44,12 @@ Cada día se organiza en 8 pestañas, con la lección activa registrado en la UR
 - **Botón "Marcar como Completada":** persiste el progreso en `localStorage`.
 
 ### 3. 📝 Hub de Evaluaciones — `quizzes.html`
-- **18 Evaluaciones Oficiales:** tarjetas por día con estado pendiente/revisado y puntaje.
+- **Evaluaciones Oficiales (24):** tarjetas por día con estado pendiente/revisado y puntaje.
 - **Acceso directo al Reto Cronometrado** de cada día (90 segundos).
-- Filtro rápido por semana (Simple Present / Continuous Tenses / Simple Past).
+- Filtro rápido por semana (Simple Present / Continuous / Simple Past / Present Perfect).
 
 ### 4. 📚 Centro de Vocabulario y Verbos — `vocabulario.html`
-- **124 Términos Clasificados:** verbos regulares, irregulares, expresiones de tiempo, rutinas y vocabulario técnico.
+- **168 Términos Clasificados:** verbos regulares, irregulares, expresiones de tiempo, rutinas y vocabulario técnico.
 - **Buscador Global:** la búsqueda del topbar (`vocabulario.html?q=...`) pre-filtra el laboratorio.
 - **Audio pronunciable** por tarjeta con la Web Speech API.
 
@@ -68,7 +68,7 @@ Cada día se organiza en 8 pestañas, con la lección activa registrado en la UR
 ```text
 EASY/
 ├── index.html              # Dashboard: métricas, progreso y módulos académicos
-├── aula.html               # Aula Virtual: 8 pestañas x 18 días (la vista principal)
+├── aula.html               # Aula Virtual: 8 pestañas x 24 días (la vista principal)
 ├── quizzes.html            # Hub de evaluaciones oficiales + acceso al reto
 ├── vocabulario.html        # Laboratorio de vocabulario y verbos
 ├── galeria.html            # Galería de infografías y afiches
@@ -93,12 +93,13 @@ EASY/
 │       ├── week-1.js       # Semana 1: Simple Present (6 días, cada uno: teoría implícita, lectura, ficha, quiz, recursos, póster)
 │       ├── week-2.js       # Semana 2: Present & Past Continuous
 │       ├── week-3.js       # Semana 3: Simple Past
-│       ├── master-vocabulary.js  # 124 términos del curso
+        ¦       ¦   week-4.js       # Semana 4: Present Perfect
+│       ├── master-vocabulary.js  # 168 términos del curso
 │       ├── stats.js        # Estadísticas de contenido
-│       ├── theories.js     # Teoría gramatical pedagógica (18 días)
+│       ├── theories.js     # Teoría gramatical pedagógica (24 días)
 │       ├── challenge-bank.js     # Banco suplementario MCQ del Reto (Semana 1)
 │       └── index.js        # API central: COURSE_DATA, getWeek(id), getDay(weekId, dayNum)
-└── archivos/               # Recursos visuales e infografías de las 3 semanas
+└── archivos/               # Recursos visuales e infografías de las 4 semanas
     ├── semana-1/
     ├── semana-2/
     └── semana-3/

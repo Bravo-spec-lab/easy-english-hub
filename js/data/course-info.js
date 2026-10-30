@@ -6,7 +6,7 @@ export const courseInfo = {
   "career": "Computación e Informática",
   "institution": "EdTech Portfolio Project",
   "level": "Nivel Técnico Profesional (A1 - A2)",
-  "totalWeeks": 3,
-  "totalDays": 18,
+  "totalWeeks": 4,
+  "totalDays": 24,
   "description": "Plataforma EdTech interactiva desarrollada por Bravo (Computación e Informática) para el aprendizaje integral de inglés técnico con lecturas asistidas por voz, diapositivas interactivas en pantalla, autoevaluaciones y práctica guiada."
 };

@@ -914,7 +914,7 @@ function toggleLessonCompletion(weekId, dayNum) {
 }
 
 function updateGlobalProgress() {
-  const totalDays = 18;
+  const totalDays = 24;
   const count = state.completedDays.length;
   const pct = Math.round((count / totalDays) * 100);
   const text = document.getElementById('topbarProgressText');

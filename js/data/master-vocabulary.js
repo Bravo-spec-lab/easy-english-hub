@@ -1,4 +1,4 @@
-// Vocabulario maestro del curso (124 términos)
+// Vocabulario maestro del curso (168 términos)
 export const masterVocabulary = [
   {
     "term": "study",
@@ -867,5 +867,313 @@ export const masterVocabulary = [
     "day": 6,
     "lesson": "Simple Past: Yesterday at Work",
     "category": "Verbos Irregulares"
+  },
+  {
+    "term": "have = haber (auxiliar con I/you/we/they)",
+    "week": 4,
+    "day": 1,
+    "lesson": "Present Perfect: First Steps",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "has = haber (auxiliar con he/she/it)",
+    "week": 4,
+    "day": 1,
+    "lesson": "Present Perfect: First Steps",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "achievement = logro",
+    "week": 4,
+    "day": 1,
+    "lesson": "Present Perfect: First Steps",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "medicine-label guide = guÃ­a de etiquetas de medicina",
+    "week": 4,
+    "day": 1,
+    "lesson": "Present Perfect: First Steps",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "patient-care checklist = lista de cuidado del paciente",
+    "week": 4,
+    "day": 1,
+    "lesson": "Present Perfect: First Steps",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "useful results = resultados Ãºtiles",
+    "week": 4,
+    "day": 1,
+    "lesson": "Present Perfect: First Steps",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "write-wrote-written",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "make-made-made",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "take-took-taken",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "see-saw-seen",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "do-did-done",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "choose-chose-chosen",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "go-went-gone",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "user guide = guÃ­a de usuario",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "budget summary = resumen de presupuesto",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "safety inspection = inspecciÃ³n de seguridad",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "equipment = equipo",
+    "week": 4,
+    "day": 2,
+    "lesson": "Irregular Verb Lab: V1, V2 & V3",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "invoice template = plantilla de facturas",
+    "week": 4,
+    "day": 3,
+    "lesson": "Present Perfect: Achievements & Results",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "webpage = pÃ¡gina web",
+    "week": 4,
+    "day": 3,
+    "lesson": "Present Perfect: Achievements & Results",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "demonstration = demostraciÃ³n",
+    "week": 4,
+    "day": 3,
+    "lesson": "Present Perfect: Achievements & Results",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "shared = compartido",
+    "week": 4,
+    "day": 3,
+    "lesson": "Present Perfect: Achievements & Results",
+    "category": "Verbos Regulares"
+  },
+  {
+    "term": "built = construido",
+    "week": 4,
+    "day": 3,
+    "lesson": "Present Perfect: Achievements & Results",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "learned = aprendido",
+    "week": 4,
+    "day": 3,
+    "lesson": "Present Perfect: Achievements & Results",
+    "category": "Verbos Regulares"
+  },
+  {
+    "term": "haven't = have not (no heâ€¦)",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "hasn't = has not (no haâ€¦)",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "not yet = aÃºn no",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Expresiones de Tiempo"
+  },
+  {
+    "term": "already = ya / antes de ahora",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Expresiones de Tiempo"
+  },
+  {
+    "term": "emergency kit = kit de emergencia",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "faulty part = pieza defectuosa",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "uploaded = subido",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Verbos Regulares"
+  },
+  {
+    "term": "labelled = etiquetado",
+    "week": 4,
+    "day": 4,
+    "lesson": "Present Perfect: Negative Sentences",
+    "category": "Verbos Regulares"
+  },
+  {
+    "term": "ever = alguna vez",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Expresiones de Tiempo"
+  },
+  {
+    "term": "never = nunca",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Expresiones de Tiempo"
+  },
+  {
+    "term": "before = antes",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Expresiones de Tiempo"
+  },
+  {
+    "term": "first-aid course = curso de primeros auxilios",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "accounting software = software contable",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "online meeting = reuniÃ³n virtual",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "tried = intentado",
+    "week": 4,
+    "day": 5,
+    "lesson": "Have You Ever? Questions & Answers",
+    "category": "Verbos Regulares"
+  },
+  {
+    "term": "portfolio = portafolio",
+    "week": 4,
+    "day": 6,
+    "lesson": "Present Perfect: My Experience Portfolio",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "experience = experiencia",
+    "week": 4,
+    "day": 6,
+    "lesson": "Present Perfect: My Experience Portfolio",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "sent = enviado",
+    "week": 4,
+    "day": 6,
+    "lesson": "Present Perfect: My Experience Portfolio",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "made = hecho",
+    "week": 4,
+    "day": 6,
+    "lesson": "Present Perfect: My Experience Portfolio",
+    "category": "Verbos Irregulares"
+  },
+  {
+    "term": "irregular verb bank = banco de verbos irregulares",
+    "week": 4,
+    "day": 6,
+    "lesson": "Present Perfect: My Experience Portfolio",
+    "category": "Vocabulario Profesional"
+  },
+  {
+    "term": "workshop = taller",
+    "week": 4,
+    "day": 6,
+    "lesson": "Present Perfect: My Experience Portfolio",
+    "category": "Vocabulario Profesional"
   }
 ];
